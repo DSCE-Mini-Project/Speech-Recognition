@@ -70,7 +70,7 @@
   .microphone-result-container {
     text-align: center;
     height: 50vh;
-  
+    
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -80,7 +80,7 @@
   }
   .microphone-result-text {
     margin-bottom: 30px;
-    width: 70vw;
+    width: 70vw;color: white;
     overflow-y: auto;
   }
   .microphone-reset {
