@@ -1,3 +1,1 @@
-.youtube{align-items: center; }
-.youtube_search{color: black; margin: 30px;}
-.text{color: white;}
+.youtube{align-items: center;display: flex;justify-content: center; }
