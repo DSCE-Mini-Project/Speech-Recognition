@@ -28,7 +28,7 @@ function Speech_recognition( ) {
       { 
         command: 'google *',
         callback : (sng)=> { 
-          // search(sng);
+          search(sng);
       } 
       },
       
@@ -67,17 +67,17 @@ function Speech_recognition( ) {
       resetTranscript();
     };
     const search=(song)=> {
-          
-         const apiUrl = 'https://www.googleapis.com/youtube/v3/search?key='+API_key+'&q='+song+'&part=snippet,id&maxResults=20';
-          fetch(apiUrl)
-            .then((response) => response.json())
-            .then((data) =>setid(data['items'][0]['id']['videoId']));
-            // setid(response['items'][0]['id']['videoId']);
+          setid('');
+        //  const apiUrl = 'https://www.googleapis.com/youtube/v3/search?key='+API_key+'&q='+song+'&part=snippet,id&maxResults=20';
+        //   fetch(apiUrl)
+        //     .then((response) => response.json())
+        //     .then((data) =>setid(data['items'][0]['id']['videoId']));
+            setid(response['items'][0]['id']['videoId']);
           console.log(song);
         }
         const opts = {
-          height: '390',
-          width: '640',
+          height: '0',
+          width: '0 ',
           playerVars: {
             // https://developers.google.com/youtube/player_parameters
             autoplay: 1,
