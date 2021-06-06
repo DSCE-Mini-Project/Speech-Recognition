@@ -13,25 +13,31 @@ function timeout(delay) {
 function Speech_recognition( ) {
   const [song,setSong]=useState('');
   useEffect(() => {
-    // will only run once when the app component loads...
     handleListing();
    
   }, []);
-  const regex = new RegExp(
-      '^[A-Za-z ]+$'
- );
+ 
  
     const [isListening, setIsListening] = useState(false);
+    const [isaudio, setIsAudio] = useState(false);
     const [id, setid] = useState('');
+    const [thumbnail, setthumbnail] = useState('');
     const microphoneRef = useRef(null);
     const commands = [
       { 
-        command: 'google *',
+        command: 'google * video',
         callback : (sng)=> { 
-          search(sng);
+           search(sng);
+           setIsAudio(false);
       } 
       },
-      
+      { 
+        command: 'google * audio',
+        callback : (sng)=> { 
+          setIsAudio(true);
+           search(sng);
+      } 
+      },
       {
         command: 'clear',
         callback: async({ resetTranscript }) => {
@@ -71,11 +77,22 @@ function Speech_recognition( ) {
         //  const apiUrl = 'https://www.googleapis.com/youtube/v3/search?key='+API_key+'&q='+song+'&part=snippet,id&maxResults=20';
         //   fetch(apiUrl)
         //     .then((response) => response.json())
-        //     .then((data) =>setid(data['items'][0]['id']['videoId']));
+        //     .then((data) =>{setid(data['items'][0]['id']['videoId']);setthumbnail(data['items'][0]['snippet']['thumbnails']['high']['url']);
+        //   });
             setid(response['items'][0]['id']['videoId']);
+           setthumbnail(response['items'][0]['snippet']['thumbnails']['high']['url'])
           console.log(song);
         }
         const opts = {
+          height: '350',
+          width: '450 ',
+          playerVars: {
+            // https://developers.google.com/youtube/player_parameters
+            autoplay: 1,
+            modestbranding:1,
+          },
+        };
+        const music_opts = {
           height: '0',
           width: '0 ',
           playerVars: {
@@ -84,7 +101,6 @@ function Speech_recognition( ) {
             modestbranding:1,
           },
         };
-        
       
     return (
       <div className="microphone-wrapper">
@@ -116,12 +132,16 @@ function Speech_recognition( ) {
           </div>
         )}
 
-       {id &&
+      {(id!='' & isaudio==false) ?
        (<div className='youtube_player'>
          <YouTube className='youtube_player' videoId={id} opts={opts} onReady={e=>e.target.playVideo()}/>
-         </div>)
+         </div>):
+          <div></div>
          }
-       
+       {(id!='' & isaudio==true) ?(<div className='youtube_player'>
+          <YouTube className='youtube_player' videoId={id} opts={music_opts} onReady={e=>e.target.playVideo()}/>
+          <img src={thumbnail} height='360' width='480'></img>
+          </div>):<div></div>}
          
       </div>
     );
