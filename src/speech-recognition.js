@@ -74,13 +74,13 @@ function Speech_recognition( ) {
     };
     const search=(song)=> {
           setid('');
-        //  const apiUrl = 'https://www.googleapis.com/youtube/v3/search?key='+API_key+'&q='+song+'&part=snippet,id&maxResults=20';
-        //   fetch(apiUrl)
-        //     .then((response) => response.json())
-        //     .then((data) =>{setid(data['items'][0]['id']['videoId']);setthumbnail(data['items'][0]['snippet']['thumbnails']['high']['url']);
-        //   });
-            setid(response['items'][0]['id']['videoId']);
-           setthumbnail(response['items'][0]['snippet']['thumbnails']['high']['url'])
+         const apiUrl = 'https://www.googleapis.com/youtube/v3/search?key='+API_key+'&q='+song+'&part=snippet,id&maxResults=20';
+          fetch(apiUrl)
+            .then((response) => response.json())
+            .then((data) =>{setid(data['items'][0]['id']['videoId']);setthumbnail(data['items'][0]['snippet']['thumbnails']['high']['url']);
+          });
+          //   setid(response['items'][0]['id']['videoId']);
+          //  setthumbnail(response['items'][0]['snippet']['thumbnails']['high']['url'])
           console.log(song);
         }
         const opts = {
