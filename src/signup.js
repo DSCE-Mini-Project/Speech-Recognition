@@ -1,47 +1,34 @@
 import React, { useState } from 'react';
-import './login.css'
+import './signup.css'
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import HttpsOutlinedIcon from '@material-ui/icons/HttpsOutlined';
 import Button from '@material-ui/core/Button';
-import { Link, useHistory } from "react-router-dom";
 import {auth} from './firebase';
-function Login() {
-  const history = useHistory(); 
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const signup = e => {
-    e.preventDefault();
-   history.push('/Signup')
-       
-}
-  const signIn = e => {
-    e.preventDefault();
-
-    auth.signInWithEmailAndPassword(email, password)
-        .then(auth => {
-            history.push('/youtubeapi')
+import { Link, useHistory } from "react-router-dom";
+function Signup() {
+    const history = useHistory(); 
+    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const signIn = e => {
+        e.preventDefault();
+    
+        auth
+        .createUserWithEmailAndPassword(email, password)
+        .then((auth) => {
+            // it successfully created a new user with email and password
+            if (auth) {
+                history.push('/')
+            }
         })
         .catch(error => alert(error.message))
-}
+    }
     return (
-      <div className="login_page">
-        <div className="header">
-          <h1 className="website_name">Website</h1>
-          <div className="Sign_up_box" onClick={signup}>
-            <h5 className="Sign_up" >Sign Up</h5>
-          </div>
-        </div>
-        <div className="login_body">
-          {/* <img
-          className="login__image"
-          src="https://images.unsplash.com/photo-1527261834078-9b37d35a4a32?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=750&q=80"
-          alt=""
-        /> */}
-          <div className="login_box">
-            <div className="login__container">
-              <h1 className="Sign_in">Sign-in</h1>
+        
+             <div className='signup_box'>
+            <div className="signup__container">
+              <h1 className="Sign_Up">Sign-Up</h1>
 
               <form>
                 <div className="email_box">
@@ -50,7 +37,7 @@ function Login() {
                     <input type="email" className="email" autoComplete="off" value={email} placeholder="Email" onChange={e => setEmail(e.target.value)}/>
                   </div>
                 </div>
-                  {/* <div className="username_box">
+                  <div className="username_box">
                     <PermIdentityIcon className="username_icon" />
                     <div className="username_text">
                       <input
@@ -62,7 +49,7 @@ function Login() {
                         onChange={e => setUsername(e.target.value)}
                       />
                     </div>
-                  </div> */}  
+                  </div>  
                 <div className="password_box">
                   <HttpsOutlinedIcon className="password_icon" />
                   <div className="password_text">
@@ -83,13 +70,12 @@ function Login() {
                   className="submit_button"
                   onClick={signIn}
                 >
-                  Login
+                  Signup
                 </Button>
             </div>
-          </div>  
-        </div>
-      </div>
-    );
+            </div>
+
+    )
 }
 
-export default Login
+export default Signup

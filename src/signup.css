@@ -1,0 +1,87 @@
+
+.signup__container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    border:1px solid whitesmoke;
+    margin:100px 100px ;
+    padding:50px;
+    border-radius: 10px;  
+}
+.signup_box{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #05253A;
+}
+.email_box{
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background-color: #0D3450;
+  border:1px solid #BBDEFB ;
+  border-radius: 10px;
+} */
+.email_icon{
+  margin-right: 10px;
+}
+.email{
+  background-color: transparent ;
+  border: 0;
+  outline: none;
+  color: white;
+  width: 200px;
+}
+.username_box{
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background-color: #0D3450;
+  border:1px solid #BBDEFB ;
+  border-radius: 10px;
+}
+.username_icon{
+  margin-right: 10px;
+}
+.username{
+  background-color: transparent ;
+  border: 0;
+  outline: none;
+  color: white;
+  width: 200px;
+}
+.password_box{
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background-color: #0D3450;
+  border:1px solid #BBDEFB ;
+  border-radius: 10px;
+}
+.password_icon{
+  margin-right: 10px;
+}
+ .password{
+  background-color: transparent ;
+  border: 0;
+  outline: none;
+  color: white;
+  width: 200px;
+}
+.Sign_in{
+  display: flex;
+ justify-content: center;
+} 
+ .submit_button{
+  width: 30%;
+ 
+} 
+ input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #0D3450 inset;
+  -webkit-text-fill-color: white !important;
+}
