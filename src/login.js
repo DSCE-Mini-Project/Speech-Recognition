@@ -21,7 +21,7 @@ function Login() {
 
     auth.signInWithEmailAndPassword(email, password)
         .then(auth => {
-            history.push('/youtubeapi')
+            history.push('/speech_recognition')
         })
         .catch(error => alert(error.message))
 }
