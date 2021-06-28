@@ -7,11 +7,10 @@ import { useRef, useState } from "react";
 import Login from './login';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Signup from './signup';
+import Loginpage from './loginpage';
 function App() {
   
   return (<div className='speech_recognition'>
-   
-    
    
     <Router>
       <div className="app">
@@ -27,7 +26,7 @@ function App() {
           </Route>
           
           <Route path="/">
-          <Youtubeapi/>
+          <Loginpage/>
           </Route>
         </Switch>
       </div>

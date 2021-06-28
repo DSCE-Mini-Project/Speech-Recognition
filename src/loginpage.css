@@ -1,0 +1,111 @@
+.login {
+  display: flex;
+}
+.image {
+    background-image: linear-gradient(#2C32C8,#7F6AFD);
+    height: 100vh;
+    width: 50%;
+  }
+.details {
+  background-color: white;
+  height: 100vh;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.centered {
+  margin: 100px;
+}
+
+.login_title {
+  color: black;
+  margin-left: 28px;
+  margin-bottom: 50px;
+}
+.username_box{
+  width: 80%;
+  border: 1px solid #625cff;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  border-radius: 5px;
+  justify-content: left;
+  align-items: flex-start;
+  margin: 30px;
+}
+.username{
+  color: black;
+}
+.username_icon{
+  color: #625cff;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.email_box {
+  width: 80%;
+  border: 1px solid #625cff;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  border-radius: 5px;
+  justify-content: left;
+  align-items: flex-start;
+  margin: 30px;
+}
+.email {
+  color: black;
+}
+.email_icon {
+  color: #625cff;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.password_box {
+  margin: 30px;
+  width: 80%;
+  border: 1px solid #625cff;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  border-radius: 5px;
+  justify-content: left;
+  align-items: flex-start;
+}
+.password {
+  color: black;
+}
+.password_icon {
+  color: #625cff;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.submit{
+    margin-top: 30px;
+    margin-left: 30px;
+  
+}
+.submit_button {
+ 
+  width: 85%;
+
+}
+.account_question {
+    margin-top: 15px;
+    margin-left: 30px;
+  color: black;
+}
+.question{
+    color: #5F4CF1;
+    cursor: pointer;
+}
+.forgot{
+  margin-top: 15px;
+    margin-left: 30px;
+}
+.forgot_password {
+  
+  color: #5F4CF1;
+  cursor: pointer;
+}
