@@ -4754,6 +4754,11 @@
   "resolved" "https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz"
   "version" "1.1.1"
 
+"effectsurfer@^3.2.6":
+  "integrity" "sha512-5LIPgjGhyfPu5HwH2hIZ9G/g+dP+t4FIJRjX7NgoFsSxHz8fdVOTqLPx2cki285NEuB3bQZB1PR+7bb6LFWVYQ=="
+  "resolved" "https://registry.npmjs.org/effectsurfer/-/effectsurfer-3.2.6.tgz"
+  "version" "3.2.6"
+
 "ejs@^2.6.1":
   "integrity" "sha512-7vmuyh5+kuUyJKePhQfRQBhXV5Ce+RnaeeQArKu1EAMpL3WbgMt5WG6uQZpEVvYSSsxMXRKOewtDk9RaTKXRlA=="
   "resolved" "https://registry.npmjs.org/ejs/-/ejs-2.7.4.tgz"

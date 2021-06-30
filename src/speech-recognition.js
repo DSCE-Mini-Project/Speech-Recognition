@@ -170,6 +170,7 @@ function Speech_recognition() {
       )} */}
       
      <Footer className='music_player' thumbnail={thumbnail} id={id}></Footer>
+     
     </div>
   );
 }

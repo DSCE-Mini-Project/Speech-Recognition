@@ -2,9 +2,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+ 
   }
   body {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-image: linear-gradient(to right,#7F6AFD,#2C32C8);
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     color: white;
   }
