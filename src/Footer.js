@@ -12,10 +12,14 @@ import { useRef, useState } from "react";
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
 import './Footer.css'
 import ReactPlayer from 'react-player'
-function Footer({thumbnail,id}) {
+function Footer({thumbnail,id,title,artist}) {
     const [playing, setPlaying] = useState(true);
     const [loop,setLoop]=useState(false);
     const [volume,setVolume]=useState(30);
+    const [elapsed,setElapsed]=useState('0:00');
+    const [duration,setDuration]=useState('0:00');
+    const [duration_sec,setDurationsec]=useState(0);
+    const [elapsed_sec,setElapsedsec]=useState(0);
     const toggle_playing =()=>{
         if(playing==true){
             setPlaying(false);
@@ -31,6 +35,20 @@ function Footer({thumbnail,id}) {
         setLoop(false);
     }
     }
+    const getduration=(dur)=>{
+        var min=Math.floor(dur/60);
+        var sec=dur-(min*60)
+        setDuration(min+':'+sec);
+        setDurationsec(Math.ceil(dur));
+    }
+    const playingtime=(tme)=>{
+        var elapsedtime=Math.ceil(tme.playedSeconds);
+        var min=Math.floor(elapsedtime/60);
+        var sec=elapsedtime-(min*60);
+        setElapsed(min+':'+sec);
+        setElapsedsec(Math.ceil(tme.playedSeconds));
+    }
+   
     const volumechange = (event, newValue) => {
         setVolume(newValue);
       };
@@ -39,23 +57,25 @@ function Footer({thumbnail,id}) {
         <div className="footer__left">
             <img className="footer__albumLogo" src={thumbnail} alt=''></img>
             <div className="footer__songInfo">
-                <h4>Yeah!</h4>
-                <p>Usher</p>
+                <h4>{title}</h4>
+                <p>{artist}</p>
             </div>
-            <ReactPlayer url={"https://www.youtube.com/watch?v="+id} className='youtube_player' height='0' width='0' playing={playing} volume={volume/100} loop={loop}/>
+            <ReactPlayer url={"https://www.youtube.com/watch?v="+id} className='youtube_player' height='0' width='0' onDuration={getduration} playing={playing} onReady={getduration} volume={volume/100} loop={loop} onProgress={playingtime}/>
             {/* <YouTube
             className="youtube_player"
             videoId={id}
             opts={opts}
             onReady={(e) => e.target.playVideo()}
-          />  */}
+          />  */} 
         </div>
         <div className="footer__center"> 
             <SkipPreviousIcon className="footer__icon" />
             {playing?<PauseCircleOutlineIcon fontSize="large" onClick={toggle_playing}/>:<PlayCircleOutlineIcon fontSize="large" onClick={toggle_playing} classname="footer__icon" />}
             <SkipNextIcon className="footer__icon" />
             {loop==false?<RepeatIcon className="footer__black" onClick={toggleloop}/>:<RepeatIcon className="footer__blue" onClick={toggleloop}/>}
-
+            <p>{elapsed}</p>
+            <Slider  max={duration_sec} value={elapsed_sec} ></Slider>
+            <p>{duration}</p>
         </div>
         <div className="footer__right">
             <Grid container spacing={2}>

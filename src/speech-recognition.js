@@ -23,6 +23,8 @@ function Speech_recognition() {
   const [isListening, setIsListening] = useState(false);
   const [isaudio, setIsAudio] = useState(false);
   const [id, setid] = useState("");
+  const [title,setTitle]=useState("");
+  const [artist,setArtist]=useState("");
   const [thumbnail, setthumbnail] = useState("");
   const microphoneRef = useRef(null);
   const commands = [
@@ -88,32 +90,17 @@ function Speech_recognition() {
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
-        setid(data["items"][0]["id"]["videoId"]);
-        setthumbnail(data["items"][0]["snippet"]["thumbnails"]["high"]["url"]);
+        setid(data["items"][0]["id"]["videoId"])
+        setTitle(data['items'][0]['snippet']['title'])
+        setArtist(data['items'][0]['snippet']['channelTitle'])
+        setthumbnail(data["items"][0]["snippet"]["thumbnails"]["high"]["url"])
       });
-    //   setid(response['items'][0]['id']['videoId']);
-    //  setthumbnail(response['items'][0]['snippet']['thumbnails']['high']['url'])
+      //   setid(response['items'][0]['id']['videoId']);
+      //   setTitle(response['items'][0]['snippet']['title'])
+      //   setArtist(response['items'][0]['snippet']['channelTitle'])
+      // setthumbnail(response['items'][0]['snippet']['thumbnails']['high']['url'])
     console.log(song);
   };
-  const opts = {
-    height: "350",
-    width: "450 ",
-    playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      autoplay: 1,
-      modestbranding: 1,
-    },
-  };
-  const music_opts = {
-    height: "0",
-    width: "0 ",
-    playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      autoplay: 1,
-      modestbranding: 1,
-    },
-  };
-
   return (
     <div className="microphone-wrapper">
       <div className="mircophone-container">
@@ -139,37 +126,9 @@ function Speech_recognition() {
           <button className="microphone-reset btn" onClick={handleReset}>
             Reset
           </button>
-          {/* <Button variant="contained" color="primary" onClick={search} className='microphone-reset btn'>Search</Button> */}
         </div>
       )}
-{/* 
-      {(id != "") & (isaudio == false) ? (
-        <div className="youtube_player">
-          <YouTube
-            className="youtube_player"
-            videoId={id}
-            opts={opts}
-            onReady={(e) => e.target.playVideo()}
-          />
-        </div>
-      ) : (
-        <div></div>
-      )}
-      {(id != "") & (isaudio == true) ? (
-        <div className="youtube_player">
-          <YouTube
-            className="youtube_player"
-            videoId={id}
-            opts={music_opts}
-            onReady={(e) => e.target.playVideo()}
-          />
-          <img src={thumbnail} height="360" width="480"></img>
-        </div>
-      ) : (
-        <div></div>
-      )} */}
-      
-     <Footer className='music_player' thumbnail={thumbnail} id={id}></Footer>
+     <Footer className='music_player' thumbnail={thumbnail} id={id} title={title} artist={artist}></Footer>
      
     </div>
   );

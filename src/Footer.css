@@ -15,11 +15,11 @@
   color: #2C32C8;
 }
 .footer__left {
-  flex: 0.3;
+  
   display: flex;
   align-items: center;
   color: black;
-  width: 300px;
+ 
 }
 .footer__albumLogo {
   height: 60px;
@@ -41,13 +41,12 @@
   font-size: 12px;
 }
 .footer__center {
-  flex: 0.4;
-  padding: 0 100px;
+  flex: 0.6;
+  justify-content: space-evenly;
   color: black;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  max-width: 300px;
+  
 }
 
 .footer__icon:hover,
