@@ -128,8 +128,9 @@ function Speech_recognition() {
           </button>
         </div>
       )}
+      {id &&
      <Footer className='music_player' thumbnail={thumbnail} id={id} title={title} artist={artist}></Footer>
-     
+      }
     </div>
   );
 }

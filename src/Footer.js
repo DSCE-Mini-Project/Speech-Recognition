@@ -12,6 +12,8 @@ import { useRef, useState } from "react";
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
 import './Footer.css'
 import ReactPlayer from 'react-player'
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 function Footer({thumbnail,id,title,artist}) {
     const [playing, setPlaying] = useState(true);
     const [loop,setLoop]=useState(false);
@@ -20,11 +22,19 @@ function Footer({thumbnail,id,title,artist}) {
     const [duration,setDuration]=useState('0:00');
     const [duration_sec,setDurationsec]=useState(0);
     const [elapsed_sec,setElapsedsec]=useState(0);
+    const [fav,setFav]=useState(false);
     const toggle_playing =()=>{
         if(playing==true){
             setPlaying(false);
         }else{
             setPlaying(true);
+        }
+    }
+    const toggle_fav=()=>{
+        if(fav==true){
+            setFav(false);
+        }else{
+            setFav(true);
         }
     }
     const toggleloop=()=>{
@@ -67,19 +77,24 @@ function Footer({thumbnail,id,title,artist}) {
             opts={opts}
             onReady={(e) => e.target.playVideo()}
           />  */} 
-        </div>
-        <div className="footer__center"> 
-            <SkipPreviousIcon className="footer__icon" />
+          <div className='control_icons'>
+          <SkipPreviousIcon className="footer__icon" />
             {playing?<PauseCircleOutlineIcon fontSize="large" onClick={toggle_playing}/>:<PlayCircleOutlineIcon fontSize="large" onClick={toggle_playing} classname="footer__icon" />}
             <SkipNextIcon className="footer__icon" />
             {loop==false?<RepeatIcon className="footer__black" onClick={toggleloop}/>:<RepeatIcon className="footer__blue" onClick={toggleloop}/>}
+            </div>
+        </div>
+        <div className="footer__center"> 
+            
             <p>{elapsed}</p>
-            <Slider  max={duration_sec} value={elapsed_sec} ></Slider>
+            <div className='song_slider'>
+            <Slider  max={duration_sec} value={elapsed_sec} color='transparent' ></Slider></div>
             <p>{duration}</p>
+
+            {fav?<FavoriteIcon className='fav__icon' onClick={toggle_fav}/>:<FavoriteBorderIcon className='fav__black' onClick={toggle_fav}/>}
         </div>
         <div className="footer__right">
             <Grid container spacing={2}>
-                
                 <Grid item>
                     <VolumeDownIcon />
                 </Grid>
