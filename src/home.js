@@ -12,25 +12,14 @@ import MicIcon from "@material-ui/icons/Mic";
 import Footer from "./Footer";
 import ReactPlayer from "react-player";
 import Header from "./header";
-import MusicNoteIcon from '@material-ui/icons/MusicNote';
-import YouTubeIcon from '@material-ui/icons/YouTube';
-import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
-import QueueIcon from '@material-ui/icons/Queue';
-import PlaylistPlayIcon from '@material-ui/icons/PlaylistPlay';
-import Music from './music';
-import Video from './video';
-import Liked from './liked';
-import Playlist from "./playlist";
-import Queue from './queue';
 function timeout(delay) {
   return new Promise((res) => setTimeout(res, delay));
 }
 function Speech_recognition() {
   const [song, setSong] = useState("");
-  // useEffect(() => {
-  // handleListing();
-  //   search();
-  // }, []);
+  useEffect(() => {
+    handleListing();
+  }, []);
 
   const [isListening, setIsListening] = useState(false);
   const [isaudio, setIsAudio] = useState(false);
@@ -38,7 +27,6 @@ function Speech_recognition() {
   const [title, setTitle] = useState("");
   const [artist, setArtist] = useState("");
   const [thumbnail, setthumbnail] = useState("");
-  const [option,setOption]=useState("1");
   const microphoneRef = useRef(null);
   const commands = [
     {
@@ -100,58 +88,48 @@ function Speech_recognition() {
       "&q=" +
       song +
       "&part=snippet,id&maxResults=20";
-    // fetch(apiUrl)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     setid(data["items"][0]["id"]["videoId"]);
-    //     setTitle(data["items"][0]["snippet"]["title"]);
-    //     setArtist(data["items"][0]["snippet"]["channelTitle"]);
-    //     setthumbnail(data["items"][0]["snippet"]["thumbnails"]["high"]["url"]);
-    //   });
-    setid(response["items"][7]["id"]["videoId"]);
-    setTitle(response["items"][7]["snippet"]["title"]);
-    setArtist(response["items"][7]["snippet"]["channelTitle"]);
-    setthumbnail(response["items"][7]["snippet"]["thumbnails"]["high"]["url"]);
-    // console.log(song);
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        setid(data["items"][0]["id"]["videoId"]);
+        setTitle(data["items"][0]["snippet"]["title"]);
+        setArtist(data["items"][0]["snippet"]["channelTitle"]);
+        setthumbnail(data["items"][0]["snippet"]["thumbnails"]["high"]["url"]);
+      });
+    //   setid(response['items'][0]['id']['videoId']);
+    //   setTitle(response['items'][0]['snippet']['title'])
+    //   setArtist(response['items'][0]['snippet']['channelTitle'])
+    // setthumbnail(response['items'][0]['snippet']['thumbnails']['high']['url'])
+    console.log(song);
   };
-  
   return (
-    <div className="home">
-      <div className="home_header">
-        <Header></Header>
-      </div>
-      <div className="home_center">
-        <div className="home_center_left">
-          <div className="option" onClick={()=>setOption(1)} >
-            <MusicNoteIcon/>
-            <p className='title'>Music</p>
-          </div>
-          <div className="option" onClick={()=>setOption(2)} >
-            <YouTubeIcon/>
-            <p className='title'>Videos</p>
-          </div>
-          <div className="option" onClick={()=>setOption(3)}>
-            <ThumbUpAltIcon />
-            <p className='title'>Liked Videos</p>
-          </div>
-          <div className="option" onClick={()=>setOption(4)}>
-            <PlaylistPlayIcon/>
-            <p className='title'>Playlist</p>
-          </div>
-          <div className="option" onClick={()=>setOption(5)}>
-            <QueueIcon/>
-            <p className='title'>Queue</p>
-          </div>
+    <div className="microphone-wrapper">
+      <Header></Header>
+      <div className="mircophone-container">
+        <div
+          className="microphone-icon-container"
+          ref={microphoneRef}
+          onClick={handleListing}
+        >
+          <MicIcon className="microphone-icon" />
         </div>
-        <div className="home_center_right" >
-          {option==1?<Music/>:<div/>}
-          {option==2?<Video/>:<div/>}
-          {option==3?<Liked/>:<div/>}
-          {option==4?<Playlist/>:<div/>}
-          {option==5?<Queue/>:<div/>}
+        <div className="microphone-status">
+          {isListening ? "Listening........." : "Click to start Listening"}
         </div>
+        {isListening && (
+          <button className="microphone-stop btn" onClick={stopHandle}>
+            Stop
+          </button>
+        )}
       </div>
-
+      {transcript && (
+        <div className="microphone-result-container">
+          <div className="microphone-result-text">{transcript}</div>
+          <button className="microphone-reset btn" onClick={handleReset}>
+            Reset
+          </button>
+        </div>
+      )}
       {id && (
         <Footer
           className="music_player"

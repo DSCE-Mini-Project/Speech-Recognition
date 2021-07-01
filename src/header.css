@@ -1,6 +1,7 @@
 .header{
     display: flex;
     margin-top: 10px;
+    width: 100%;
 }
 .header_left{
     flex:0.2;

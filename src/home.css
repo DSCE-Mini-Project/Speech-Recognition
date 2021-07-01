@@ -93,37 +93,3 @@
   .youtube_player{
     display: flex;justify-content: center;
   }
-  .home{
-    display: flex;
-    flex-direction: column;
-  }
-  .home_header{
-    height: 10vh;
-  }
-  .home_center{
-    height: 80vh ;
-    display: flex;
-  }
-  .home_center_left{
-    flex:0.2;
-    display: flex;
-    flex-direction: column;
-    
-    
-  }
-  .option{
-    cursor: pointer;
-    display: flex;
-    margin-left: 70px;
-    margin-top: 40px;
-    margin-bottom: 10px;
-    
-  }
-  .title{
-    padding-left: 20px;
-  }
-  .home_center_right{
-    flex: 0.8 ;
-    border:2px solid white;
-  }
-  

@@ -108,5 +108,3 @@ function Footer({thumbnail,id,title,artist}) {
 }
 
 export default Footer
-
-
