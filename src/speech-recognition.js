@@ -10,7 +10,8 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import MicIcon from "@material-ui/icons/Mic";
 import Footer from "./Footer";
-import ReactPlayer from 'react-player'
+import ReactPlayer from "react-player";
+import Header from "./header";
 function timeout(delay) {
   return new Promise((res) => setTimeout(res, delay));
 }
@@ -23,8 +24,8 @@ function Speech_recognition() {
   const [isListening, setIsListening] = useState(false);
   const [isaudio, setIsAudio] = useState(false);
   const [id, setid] = useState("");
-  const [title,setTitle]=useState("");
-  const [artist,setArtist]=useState("");
+  const [title, setTitle] = useState("");
+  const [artist, setArtist] = useState("");
   const [thumbnail, setthumbnail] = useState("");
   const microphoneRef = useRef(null);
   const commands = [
@@ -90,19 +91,20 @@ function Speech_recognition() {
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
-        setid(data["items"][0]["id"]["videoId"])
-        setTitle(data['items'][0]['snippet']['title'])
-        setArtist(data['items'][0]['snippet']['channelTitle'])
-        setthumbnail(data["items"][0]["snippet"]["thumbnails"]["high"]["url"])
+        setid(data["items"][0]["id"]["videoId"]);
+        setTitle(data["items"][0]["snippet"]["title"]);
+        setArtist(data["items"][0]["snippet"]["channelTitle"]);
+        setthumbnail(data["items"][0]["snippet"]["thumbnails"]["high"]["url"]);
       });
-      //   setid(response['items'][0]['id']['videoId']);
-      //   setTitle(response['items'][0]['snippet']['title'])
-      //   setArtist(response['items'][0]['snippet']['channelTitle'])
-      // setthumbnail(response['items'][0]['snippet']['thumbnails']['high']['url'])
+    //   setid(response['items'][0]['id']['videoId']);
+    //   setTitle(response['items'][0]['snippet']['title'])
+    //   setArtist(response['items'][0]['snippet']['channelTitle'])
+    // setthumbnail(response['items'][0]['snippet']['thumbnails']['high']['url'])
     console.log(song);
   };
   return (
     <div className="microphone-wrapper">
+      <Header></Header>
       <div className="mircophone-container">
         <div
           className="microphone-icon-container"
@@ -128,9 +130,15 @@ function Speech_recognition() {
           </button>
         </div>
       )}
-      {id &&
-     <Footer className='music_player' thumbnail={thumbnail} id={id} title={title} artist={artist}></Footer>
-      }
+      {id && (
+        <Footer
+          className="music_player"
+          thumbnail={thumbnail}
+          id={id}
+          title={title}
+          artist={artist}
+        ></Footer>
+      )}
     </div>
   );
 }
