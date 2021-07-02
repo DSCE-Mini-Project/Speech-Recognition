@@ -29,7 +29,7 @@ function Speech_recognition() {
   const [song, setSong] = useState("");
   useEffect(() => {
   // handleListing();
-  //search();
+  search();
   }, []);
 
   const [isListening, setIsListening] = useState(false);

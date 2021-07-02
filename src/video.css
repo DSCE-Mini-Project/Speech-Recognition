@@ -3,7 +3,17 @@
     flex-wrap: wrap;
     overflow: auto;
     height: 100%;
+    margin: 30px;
 }
 .video::-webkit-scrollbar {
     display: none;
+}
+.video__tile{
+    margin-bottom: 40px;
+    width: 270px;
+    margin-right: 20px;
+}
+.videocard__thumbnail{
+    height:140px;
+    width:250px;
 }

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useRef, useState } from "react";
 import Button from "@material-ui/core/Button";
 import videos_response from './videos_response';
+import Avatar from '@material-ui/core/Avatar';
 import './video.css'
 function Video() {
   const [videos,setVideos]=useState([])
@@ -30,8 +31,16 @@ export default Video
 
 function VideoTile({item}) {
   return (
-    <div>
-     <p>{item.snippet.title}</p>
+    <div className='video__tile'>
+     
+      <img className='videocard__thumbnail' src={item.snippet.thumbnails.high.url}></img>
+      
+      <div className='videoCard__info'>
+      <h4>{item.snippet.title}</h4>
+      <p>{item.snippet.channelTitle}</p>
+      <p>{item.snippet.publishedAt}</p>
+      </div>
+    
     </div>
   )
 }
