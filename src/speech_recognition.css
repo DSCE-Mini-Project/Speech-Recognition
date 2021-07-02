@@ -96,6 +96,7 @@
   .home{
     display: flex;
     flex-direction: column;
+    overflow: hidden;
   }
   .home_header{
     height: 10vh;

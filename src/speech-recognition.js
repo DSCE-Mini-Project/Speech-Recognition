@@ -27,10 +27,10 @@ function timeout(delay) {
 }
 function Speech_recognition() {
   const [song, setSong] = useState("");
-  // useEffect(() => {
+  useEffect(() => {
   // handleListing();
-  //   search();
-  // }, []);
+  //search();
+  }, []);
 
   const [isListening, setIsListening] = useState(false);
   const [isaudio, setIsAudio] = useState(false);

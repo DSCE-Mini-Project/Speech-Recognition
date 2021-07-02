@@ -79,7 +79,7 @@ function Footer({thumbnail,id,title,artist}) {
           />  */} 
           <div className='control_icons'>
           <SkipPreviousIcon className="footer__icon" />
-            {playing?<PauseCircleOutlineIcon fontSize="large" onClick={toggle_playing}/>:<PlayCircleOutlineIcon fontSize="large" onClick={toggle_playing} classname="footer__icon" />}
+            {playing?<PauseCircleOutlineIcon fontSize="large" className="footer__icon" onClick={toggle_playing}/>:<PlayCircleOutlineIcon fontSize="large" onClick={toggle_playing} className="footer__icon" />}
             <SkipNextIcon className="footer__icon" />
             {loop==false?<RepeatIcon className="footer__black" onClick={toggleloop}/>:<RepeatIcon className="footer__blue" onClick={toggleloop}/>}
             </div>
