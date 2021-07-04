@@ -12,8 +12,10 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import {useDataLayerValue} from './DataLayer';
 function Loginpage() {
   const [open, setOpen] = useState(false);
+  const[{uid},dispatch]=useDataLayerValue();
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -39,6 +41,11 @@ function Loginpage() {
     auth
       .signInWithEmailAndPassword(email, password)
       .then((auth) => {
+        dispatch({
+          type:"SET_UID",
+          uid:1234,
+        });
+        
         history.push("/speech_recognition");
       })
       .catch((error) => alert(error.message));

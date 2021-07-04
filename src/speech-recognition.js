@@ -22,14 +22,17 @@ import Video from './video';
 import Liked from './liked';
 import Playlist from "./playlist";
 import Queue from './queue';
+import {useDataLayerValue} from './DataLayer';
 function timeout(delay) {
   return new Promise((res) => setTimeout(res, delay));
 }
 function Speech_recognition() {
   const [song, setSong] = useState("");
+  const[{uid},dispatch]=useDataLayerValue();
   useEffect(() => {
   // handleListing();
-  search();
+  console.log('user '+uid); 
+  // search();
   }, []);
 
   const [isListening, setIsListening] = useState(false);
