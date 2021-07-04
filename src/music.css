@@ -1,0 +1,42 @@
+.music{
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+    height: 100%;
+   margin-top: 30px;
+   backdrop-filter: blur(50px);;
+}
+.music::-webkit-scrollbar {
+    display: none;
+}
+.music__tile{
+    height: 70px;
+    cursor: pointer;
+    display: flex;
+    width: 45%;
+    align-items: center;
+    margin: 20px;
+    justify-content: space-evenly;
+    border-radius: 20px;
+    -webkit-box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
+    
+}
+.music__tile:hover {
+    transition: transform 0.2s ease-in-out;
+    transform: scale(1.1) !important;
+  }
+.musicCard__left{
+    flex:0.1;
+}
+.musiccard__thumbnail{
+    height:90%;
+    width: 80%;
+    
+}
+.musicCard__info{
+    flex: 0.5;
+}
+.musicCard__right{
+    flex:0.3;
+    justify-content: start;
+}

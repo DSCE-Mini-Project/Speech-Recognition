@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useRef, useState } from "react";
 import Button from "@material-ui/core/Button";
-import videos_response from './videos_response';
+import response_video from './response_video';
 import Avatar from '@material-ui/core/Avatar';
 import './video.css'
 function Video() {
@@ -20,7 +20,7 @@ function Video() {
   }
     return (
         <div className="video">
-          {videos_response.items.map((item)=><VideoTile item={item}></VideoTile>)}
+          {response_video.items.map((item)=><VideoTile item={item} ></VideoTile>)}
           
         </div>
     )
@@ -31,7 +31,7 @@ export default Video
 
 function VideoTile({item}) {
   return (
-    <div className='video__tile'>
+    <div className='video__tile' onClick={()=>console.log(item.id)}>
      
       <img className='videocard__thumbnail' src={item.snippet.thumbnails.high.url}></img>
       

@@ -51,6 +51,9 @@
     align-items: center;
     justify-content: flex-end;
 }
+h5{
+    margin-right: 10px  ;
+}
 .profile_pic{
     height:40px;
     width: 40px;
