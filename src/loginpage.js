@@ -5,7 +5,7 @@ import HttpsOutlinedIcon from "@material-ui/icons/HttpsOutlined";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import Button from "@material-ui/core/Button";
 import { Link, useHistory } from "react-router-dom";
-import { auth } from "./firebase";
+import { auth,db } from "./firebase";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -13,6 +13,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import {useDataLayerValue} from './DataLayer';
+
 function Loginpage() {
   const [open, setOpen] = useState(false);
   const[{uid},dispatch]=useDataLayerValue();
@@ -43,9 +44,10 @@ function Loginpage() {
       .then((auth) => {
         dispatch({
           type:"SET_UID",
-          uid:1234,
+          uid:auth.user.uid,
         });
-        
+        console.log(auth);
+        db.collection('profile').doc(auth.user.uid).set({name:auth.user.uid})
         history.push("/speech_recognition");
       })
       .catch((error) => alert(error.message));

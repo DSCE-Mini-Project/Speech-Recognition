@@ -1,6 +1,6 @@
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
 import firebase from 'firebase';
+import 'firebase/storage';
 const firebaseConfig = {
   apiKey: "AIzaSyA_-pgGuPTYypNGox45JMcC0u86u87Tu8I",
   authDomain: "voice-controlled-media-player.firebaseapp.com",

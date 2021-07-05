@@ -1,0 +1,23 @@
+.liked{
+    margin-top: 10px;
+}
+.radio{
+    width: 95%;
+    display: flex;
+    justify-content: flex-end;
+}
+.liked::-webkit-scrollbar {
+    display: none;
+}
+
+.video__tile{
+    margin-bottom: 40px;
+    width: 270px;
+    margin-right: 20px;
+    cursor: pointer;
+
+}
+.videocard__thumbnail{
+    height:140px;
+    width:250px;
+}
