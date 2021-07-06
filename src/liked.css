@@ -10,14 +10,51 @@
     display: none;
 }
 
-.video__tile{
+.video_tile{
     margin-bottom: 40px;
     width: 270px;
     margin-right: 20px;
     cursor: pointer;
 
 }
-.videocard__thumbnail{
+.videocard_thumbnail{
     height:140px;
     width:250px;
+}
+.liked_items{
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+    height: 100%;
+}
+.music_tile{
+    height: 70px;
+    cursor: pointer;
+    display: flex;
+    width: 45%;
+    align-items: center;
+    margin: 20px;
+    justify-content: space-evenly;
+    border-radius: 20px;
+    -webkit-box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
+    
+}
+.music_tile:hover {
+    transition: transform 0.2s ease-in-out;
+    transform: scale(1.1) !important;
+  }
+.musicCard_left{
+    flex:0.1;
+}
+.musiccard_thumbnail{
+    height:90%;
+    width: 80%;
+    
+}
+.musicCard_info{
+    flex: 0.5;
+}
+.musicCard_right{
+    flex:0.3;
+    justify-content: start;
 }
