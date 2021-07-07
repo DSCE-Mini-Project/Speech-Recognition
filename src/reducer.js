@@ -35,6 +35,16 @@ const reducer = (state, action) => {
                 ...state,
                 thumbnail:action.thumbnail
             }
+        case "SET_CONTENT_TYPE":
+            return {
+                ...state,
+                isaudio:action.isaudio
+            }
+        case "SET_THUMBNAIL":
+            return {
+                ...state,
+                thumbnail:action.thumbnail
+            }
         default:
             return state;
     }

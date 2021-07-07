@@ -27,6 +27,14 @@ function MusicTile({item}) {
         type:"SET_ARTIST",
         artist:item.snippet.channelTitle,
       })
+      dispatch({
+        type:"SET_CONTENT_TYPE",
+        isaudio:true,
+      })
+      dispatch({
+        type:"SET_THUMBNAIL",
+        thumbnail:item.snippet.thumbnails.high.url,
+      })
     }
     return (
         <div className='music__tile' onClick={()=>{setvalues()}}>

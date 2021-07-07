@@ -44,6 +44,10 @@ function VideoTile({item}) {
         type:"SET_ARTIST",
         artist:item.snippet.channelTitle,
       })
+      dispatch({
+        type:"SET_CONTENT_TYPE",
+        isaudio:false,
+      })
     }
   return (
     <div className='video__tile' onClick={()=>{setvalues()}}>
