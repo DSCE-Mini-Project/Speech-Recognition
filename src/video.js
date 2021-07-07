@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import Button from "@material-ui/core/Button";
 import response_video from './response_video';
 import Avatar from '@material-ui/core/Avatar';
+import {useDataLayerValue} from './DataLayer';
 import './video.css'
 
 function Video() {
@@ -31,8 +32,21 @@ export default Video
 
 
 function VideoTile({item}) {
+  const[{},dispatch]=useDataLayerValue();
+    const setvalues=()=>{
+      dispatch({
+        type:"SET_ID",
+        id:item.id,
+      }); dispatch({
+        type:"SET_TITLE",
+        title:item.snippet.title,
+      });dispatch({
+        type:"SET_ARTIST",
+        artist:item.snippet.channelTitle,
+      })
+    }
   return (
-    <div className='video__tile' onClick={()=>console.log(item.id)}>
+    <div className='video__tile' onClick={()=>{setvalues()}}>
      
       <img className='videocard__thumbnail' src={item.snippet.thumbnails.high.url}></img>
       

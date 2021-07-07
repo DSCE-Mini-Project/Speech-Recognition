@@ -14,6 +14,7 @@
 }
 .video_title{
     margin-top: 10px;
+    margin-left: 15px;
     color: black;
     overflow: hidden;
    text-overflow: ellipsis;
@@ -22,7 +23,7 @@
    -webkit-box-orient: vertical;
 }
 .artist{
-    margin: 10px 10px 0px 20px;
+    margin: 10px 10px 0px 15px;
     color: #505050;
     font-size: 12px;
 }

@@ -16,11 +16,20 @@ export default Music
 
 function MusicTile({item}) {
     const[{},dispatch]=useDataLayerValue();
+    const setvalues=()=>{
+      dispatch({
+        type:"SET_ID",
+        id:item.id,
+      }); dispatch({
+        type:"SET_TITLE",
+        title:item.snippet.title,
+      });dispatch({
+        type:"SET_ARTIST",
+        artist:item.snippet.channelTitle,
+      })
+    }
     return (
-        <div className='music__tile' onClick={()=>{dispatch({
-            type:"SET_ID",
-            id:item.id,
-          });}}>
+        <div className='music__tile' onClick={()=>{setvalues()}}>
         <div className='musicCard__left'>
         <img className='musiccard__thumbnail' src={item.snippet.thumbnails.high.url}></img>
         </div>

@@ -19,7 +19,22 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 id: action.id
-            };    
+            }; 
+        case "SET_TITLE":
+            return {
+                ...state,
+                title:action.title
+            }
+        case "SET_ARTIST":
+            return {
+                ...state,
+                artist:action.artist
+            }
+        case "SET_THUMBNAIL":
+            return {
+                ...state,
+                thumbnail:action.thumbnail
+            }
         default:
             return state;
     }

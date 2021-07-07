@@ -64,8 +64,21 @@ function Queue() {
   export default Queue;
   
   function VideoTile({ id, channeltitle, duration, title, url }) {
+    const[{},dispatch]=useDataLayerValue();
+    const setvalues=()=>{
+      dispatch({
+        type:"SET_ID",
+        id:id,
+      }); dispatch({
+        type:"SET_TITLE",
+        title:title,
+      });dispatch({
+        type:"SET_ARTIST",
+        artist:channeltitle,
+      })
+    }
     return (
-      <div className="video_tile" onClick={() => console.log(id)}>
+      <div className="video_tile" onClick={()=>{setvalues()}}>
         <img className="videocard_thumbnail" src={url}></img>
   
         <div className="videoCard_info">
@@ -78,9 +91,21 @@ function Queue() {
   }
   
   function MusicTile({ id, channeltitle, duration, title, url }) {
-    console.log(title);
+    const[{},dispatch]=useDataLayerValue();
+    const setvalues=()=>{
+      dispatch({
+        type:"SET_ID",
+        id:id,
+      }); dispatch({
+        type:"SET_TITLE",
+        title:title,
+      });dispatch({
+        type:"SET_ARTIST",
+        artist:channeltitle,
+      })
+    }
     return (
-      <div className="music_tile" onClick={() => console.log(id)}>
+      <div className="music_tile" onClick={()=>{setvalues()}}>
         <div className="musicCard_left">
           <img className="musiccard_thumbnail" src={url}></img>
         </div>
