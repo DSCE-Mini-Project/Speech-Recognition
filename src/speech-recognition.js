@@ -23,6 +23,7 @@ import Liked from './liked';
 import Playlist from "./playlist";
 import Queue from './queue';
 import {useDataLayerValue} from './DataLayer';
+import Footer_video from "./footer_video";
 function timeout(delay) {
   return new Promise((res) => setTimeout(res, delay));
 }
@@ -31,8 +32,8 @@ function Speech_recognition() {
   const[{uid},dispatch]=useDataLayerValue();
   useEffect(() => {
   // handleListing();
-  console.log('user '+uid); 
-  // search();
+ 
+  search();
   }, []);
 
   const [isListening, setIsListening] = useState(false);
@@ -156,13 +157,20 @@ function Speech_recognition() {
       </div>
 
       {id && (
-        <Footer
-          className="music_player"
-          thumbnail={thumbnail}
-          id={id}
-          title={title}
-          artist={artist}
-        ></Footer>
+
+        <Footer_video id={id} title={title} artist={artist}>
+
+        </Footer_video>
+
+
+
+        // <Footer
+        //   className="music_player"
+        //   thumbnail={thumbnail}
+        //   id={id}
+        //   title={title}
+        //   artist={artist}
+        // ></Footer>
       )}
     </div>
   );
