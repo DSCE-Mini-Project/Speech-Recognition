@@ -29,18 +29,18 @@ function timeout(delay) {
 }
 function Speech_recognition() {
   const [song, setSong] = useState("");
-  const[{uid},dispatch]=useDataLayerValue();
+  const[{uid,id,title,artist},dispatch]=useDataLayerValue();
   useEffect(() => {
   // handleListing();
- 
+    console.log(id);
   search();
-  }, []);
+  }, [id]);
 
   const [isListening, setIsListening] = useState(false);
   const [isaudio, setIsAudio] = useState(false);
-  const [id, setid] = useState("");
-  const [title, setTitle] = useState("");
-  const [artist, setArtist] = useState("");
+  // const [id, setid] = useState("");
+  // const [title, setTitle] = useState("");
+  // const [artist, setArtist] = useState("");
   const [thumbnail, setthumbnail] = useState("");
   const [option,setOption]=useState("1");
   const microphoneRef = useRef(null);
@@ -97,7 +97,7 @@ function Speech_recognition() {
     resetTranscript();
   };
   const search = (song) => {
-    setid("");
+    // setid("");
     const apiUrl =
       "https://www.googleapis.com/youtube/v3/search?key=" +
       API_key +
@@ -112,10 +112,10 @@ function Speech_recognition() {
     //     setArtist(data["items"][0]["snippet"]["channelTitle"]);
     //     setthumbnail(data["items"][0]["snippet"]["thumbnails"]["high"]["url"]);
     //   });
-    setid(response["items"][7]["id"]["videoId"]);
-    setTitle(response["items"][7]["snippet"]["title"]);
-    setArtist(response["items"][7]["snippet"]["channelTitle"]);
-    setthumbnail(response["items"][7]["snippet"]["thumbnails"]["high"]["url"]);
+    // setid(response["items"][7]["id"]["videoId"]);
+    // setTitle(response["items"][7]["snippet"]["title"]);
+    // setArtist(response["items"][7]["snippet"]["channelTitle"]);
+    // setthumbnail(response["items"][7]["snippet"]["thumbnails"]["high"]["url"]);
     // console.log(song);
   };
   

@@ -1,6 +1,7 @@
 import React from 'react'
 import './music.css'
 import response_music from './response_music';
+import {useDataLayerValue} from './DataLayer';
 function Music() {
     
     return (
@@ -14,8 +15,12 @@ function Music() {
 export default Music
 
 function MusicTile({item}) {
+    const[{},dispatch]=useDataLayerValue();
     return (
-        <div className='music__tile' onClick={()=>console.log(item.id)}>
+        <div className='music__tile' onClick={()=>{dispatch({
+            type:"SET_ID",
+            id:item.id,
+          });}}>
         <div className='musicCard__left'>
         <img className='musiccard__thumbnail' src={item.snippet.thumbnails.high.url}></img>
         </div>

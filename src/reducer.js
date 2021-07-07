@@ -1,6 +1,11 @@
 export const initialState = {
     uid: null,  
     playing: false,
+    id: null,
+    title:null,
+    artist:null,
+    thumbnail:null,
+    isaudio:null,
 };
 const reducer = (state, action) => {
     console.log(action);
@@ -10,6 +15,11 @@ const reducer = (state, action) => {
                 ...state,
                 uid: action.uid
             };
+        case "SET_ID":
+            return {
+                ...state,
+                id: action.id
+            };    
         default:
             return state;
     }
