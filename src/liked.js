@@ -75,7 +75,15 @@ function VideoTile({ id, channeltitle, duration, title, url }) {
       });dispatch({
         type:"SET_ARTIST",
         artist:channeltitle,
-      })
+      });
+      dispatch({
+        type:"SET_THUMBNAIL",
+        thumbnail:url,
+      });
+      dispatch({
+        type:"SET_CONTENT_TYPE",
+        isaudio:false,
+      });
     }
   return (
     <div className="video_tile" onClick={()=>{setvalues()}}>
@@ -102,7 +110,15 @@ function MusicTile({ id, channeltitle, duration, title, url }) {
       });dispatch({
         type:"SET_ARTIST",
         artist:channeltitle,
-      })
+      });
+      dispatch({
+        type:"SET_THUMBNAIL",
+        thumbnail:url,
+      });
+      dispatch({
+        type:"SET_CONTENT_TYPE",
+        isaudio:true,
+      });
     }
   return (
     <div className="music_tile" onClick={()=>{setvalues()}}>
