@@ -20,6 +20,13 @@
   color: black;
  
 }
+.footer_title{
+  overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 1; 
+   -webkit-box-orient: vertical;
+}
 .control_icons{
   margin-left: 40px;
   display: flex;

@@ -157,7 +157,7 @@ function Speech_recognition() {
       </div>
 
       
-        {isaudio == false && id!=null? 
+        {isaudio == false &&   id!=null ? 
           <Footer_video id={id} title={title} artist={artist}></Footer_video>
          : 
           <Footer

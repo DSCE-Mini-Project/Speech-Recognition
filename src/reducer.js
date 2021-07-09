@@ -6,6 +6,7 @@ export const initialState = {
     artist:null,
     thumbnail:null,
     isaudio:null,
+    volume:0,
 };
 const reducer = (state, action) => {
     console.log(action);
@@ -44,6 +45,11 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 thumbnail:action.thumbnail
+            }
+        case "SET_VOLUME":
+            return {
+                ...state,
+                volume:action.volume
             }
         default:
             return state;

@@ -14,10 +14,12 @@ import './Footer.css'
 import ReactPlayer from 'react-player'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import { useDataLayerValue } from "./DataLayer";
 function Footer({thumbnail,id,title,artist}) {
+    const [{volume}, dispatch] = useDataLayerValue();
     const [playing, setPlaying] = useState(true);
     const [loop,setLoop]=useState(false);
-    const [volume,setVolume]=useState(30);
+    // const [volume,setVolume]=useState(30);
     const [elapsed,setElapsed]=useState('0:00');
     const [duration,setDuration]=useState('0:00');
     const [duration_sec,setDurationsec]=useState(0);
@@ -60,14 +62,18 @@ function Footer({thumbnail,id,title,artist}) {
     }
    
     const volumechange = (event, newValue) => {
-        setVolume(newValue);
+        dispatch({
+        type:"SET_VOLUME",
+        volume:newValue,
+        })
+        // setVolume(newValue);
       };
     return (
         <div className='footer'>
         <div className="footer__left">
             <img className="footer__albumLogo" src={thumbnail} alt=''></img>
             <div className="footer__songInfo">
-                <h4>{title}</h4>
+                <h4 className='footer_title'>{title}</h4>
                 <p>{artist}</p>
             </div>
             <ReactPlayer url={"https://www.youtube.com/watch?v="+id} className='youtube_player' height='0' width='0' onDuration={getduration} playing={playing} onReady={getduration} volume={volume/100} loop={loop} onProgress={playingtime}/>
