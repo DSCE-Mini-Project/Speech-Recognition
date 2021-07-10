@@ -19,7 +19,6 @@ function Footer({thumbnail,id,title,artist}) {
     const [{volume}, dispatch] = useDataLayerValue();
     const [playing, setPlaying] = useState(true);
     const [loop,setLoop]=useState(false);
-    // const [volume,setVolume]=useState(30);
     const [elapsed,setElapsed]=useState('0:00');
     const [duration,setDuration]=useState('0:00');
     const [duration_sec,setDurationsec]=useState(0);

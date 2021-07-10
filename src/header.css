@@ -18,7 +18,7 @@
 .header_center{
     flex:0.6;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 .search_bar{
