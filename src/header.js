@@ -8,7 +8,7 @@ function Header() {
     <div className="header">
       <div className="header_left">
         <img className='website_logo' src='https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1934&q=80' alt=' Logo'></img>
-        <p>Website_name</p>
+        <p>Website</p>
       </div>
       <div className="header_center">
         <div className='search_bar'>
