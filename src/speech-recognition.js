@@ -32,8 +32,8 @@ function Speech_recognition() {
   const [{ uid, id, title, artist, isaudio,thumbnail}, dispatch] = useDataLayerValue();
   useEffect(() => {
     // handleListing();
-    console.log(id);
-    search();
+    //console.log(id);
+    //search();
   }, [id,isaudio]);
 
   const [isListening, setIsListening] = useState(false);

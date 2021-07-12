@@ -6,7 +6,7 @@ export const initialState = {
     artist:null,
     thumbnail:null,
     isaudio:null,
-    volume:0,
+    volume:30,
 };
 const reducer = (state, action) => {
     console.log(action);

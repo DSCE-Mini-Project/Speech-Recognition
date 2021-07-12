@@ -58,3 +58,10 @@
     flex:0.3;
     justify-content: start;
 }
+h4{
+    overflow: hidden;
+    text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 1; 
+   -webkit-box-orient: vertical;
+}

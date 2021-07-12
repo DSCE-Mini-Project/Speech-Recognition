@@ -16,6 +16,7 @@
     width: 45%;
     align-items: center;
     margin: 20px;
+    margin-left: 35px;
     justify-content: space-evenly;
     border-radius: 20px;
     -webkit-box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
@@ -36,7 +37,18 @@
 .musicCard__info{
     flex: 0.5;
 }
+
+.musiccard_title{
+    overflow: hidden;
+    text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 1; 
+   -webkit-box-orient: vertical;
+}
 .musicCard__right{
     flex:0.3;
     justify-content: start;
+}
+.icon_button{
+    color: white !important;
 }

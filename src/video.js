@@ -5,7 +5,11 @@ import response_video from './response_video';
 import Avatar from '@material-ui/core/Avatar';
 import {useDataLayerValue} from './DataLayer';
 import './video.css'
-
+import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { auth,db } from "./firebase";
 function Video() {
   const [videos,setVideos]=useState([])
   // useEffect(() => {
@@ -32,7 +36,24 @@ export default Video
 
 
 function VideoTile({item}) {
-  const[{},dispatch]=useDataLayerValue();
+  const[{uid},dispatch]=useDataLayerValue();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+const handleClick = (event) => {
+  setAnchorEl(event.currentTarget);
+};
+const handleClose = (option) => {
+  console.log(option);
+  db.collection(option).doc(uid).collection('video').add({'channeltitle':item.snippet.channelTitle,'id':item.id,'duration':'5:30','title':item.snippet.title,'url':item.snippet.thumbnails.high.url})
+  setAnchorEl(null);
+
+};
+const options = [
+  'playlist',
+  'queue',
+  
+];
     const setvalues=()=>{
       dispatch({
         type:"SET_ID",
@@ -57,7 +78,37 @@ function VideoTile({item}) {
       <div className='videoCard__info'>
       <h4>{item.snippet.title}</h4>
       <p>{item.snippet.channelTitle}</p>
+      <div className='videocard_option'>
       <p>{item.snippet.publishedAt}</p>
+      <IconButton
+        aria-label="more"
+        aria-controls="long-menu"
+        aria-haspopup="true"
+        className='icon_button'
+        onClick={handleClick}
+      >
+        <MoreVertIcon />
+      </IconButton>
+      <Menu
+        id="long-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={open}
+        onClose={handleClose}
+        PaperProps={{
+          style: {
+            maxHeight: 200 * 4.5,
+            width: '20ch',
+          },
+        }}
+      >
+        {options.map((option) => (
+          <MenuItem key={option} selected={option === 'Playlist'} onClick={()=>handleClose(option)}>
+            {option}
+          </MenuItem>
+        ))}
+      </Menu>
+      </div>
       </div>
     
     </div>
