@@ -1,9 +1,101 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useRef, useState } from "react";
 import "./header.css";
 import SearchIcon from '@material-ui/icons/Search';
 import MicIcon from '@material-ui/icons/Mic';
 import Mic from "@material-ui/icons/Mic";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
+import API_key from "./keys";
+import MicOffIcon from '@material-ui/icons/MicOff';
+
+function timeout(delay) {
+  return new Promise((res) => setTimeout(res, delay));
+}
 function Header() {
+  const [isListening, setIsListening] = useState(false);
+  const microphoneRef = useRef(null);
+  const [mic,setMic]=useState(false);
+  const commands = [
+    {
+      command: "google * video",
+      callback: (sng) => {
+        search(sng);
+        // setIsAudio(false);
+      },
+    },
+    {
+      command: "google * audio",
+      callback: (sng) => {
+        // setIsAudio(true);
+        search(sng);
+      },
+    },
+    {
+      command: "clear",
+      callback: async ({ resetTranscript }) => {
+        handleReset();
+        await timeout(1000);
+        handleListing();
+      },
+    },
+  ];
+
+  const { transcript, resetTranscript } = useSpeechRecognition({ commands });
+  if (
+    !SpeechRecognition.browserSupportsSpeechRecognition({ continuous: true })
+  ) {
+    return (
+      <div className="mircophone-container">
+        Browser is not Support Speech Recognition.
+      </div>
+    );
+  }
+
+  const handleListing = () => {
+    setMic(true)
+    setIsListening(true);
+    //microphoneRef.current.classList.add("listening");
+    console.log('started')
+    SpeechRecognition.startListening({
+      continuous: true,
+    });
+  };
+  const stopHandle = () => {
+    setMic(false)
+    setIsListening(false);
+    //microphoneRef.current.classList.remove("listening");
+    SpeechRecognition.stopListening();
+  };
+  const handleReset = () => {
+    stopHandle();
+    resetTranscript();
+  };
+  const search = (song) => {
+    // setid("");
+    const apiUrl =
+      "https://www.googleapis.com/youtube/v3/search?key=" +
+      API_key +
+      "&q=" +
+      song +
+      "&part=snippet,id&maxResults=20";
+    // fetch(apiUrl)
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     setid(data["items"][0]["id"]["videoId"]);
+    //     setTitle(data["items"][0]["snippet"]["title"]);
+    //     setArtist(data["items"][0]["snippet"]["channelTitle"]);
+    //     setthumbnail(data["items"][0]["snippet"]["thumbnails"]["high"]["url"]);
+    //   });
+    // setid(response["items"][7]["id"]["videoId"]);
+    // setTitle(response["items"][7]["snippet"]["title"]);
+    // setArtist(response["items"][7]["snippet"]["channelTitle"]);
+    // setthumbnail(response["items"][7]["snippet"]["thumbnails"]["high"]["url"]);
+     console.log(song);
+    
+  };
+
   return (
     <div className="header">
       <div className="header_left">
@@ -15,7 +107,8 @@ function Header() {
             <SearchIcon className='search_icon'></SearchIcon>
             <input type='text' className='search_text' placeholder='Search for songs,videos and ...'></input>
         </div>
-        <Mic></Mic>
+        {mic?<Mic onClick={stopHandle}></Mic>:<MicOffIcon onClick={handleListing}></MicOffIcon>}
+        
       </div>
       <div className="header_right">
         
