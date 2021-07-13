@@ -4,16 +4,18 @@ import "./header.css";
 import SearchIcon from '@material-ui/icons/Search';
 import MicIcon from '@material-ui/icons/Mic';
 import Mic from "@material-ui/icons/Mic";
+import response from "./response";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import API_key from "./keys";
 import MicOffIcon from '@material-ui/icons/MicOff';
-
+import {useDataLayerValue} from './DataLayer';
 function timeout(delay) {
   return new Promise((res) => setTimeout(res, delay));
 }
 function Header() {
+  const[{uid},dispatch]=useDataLayerValue();
   const [isListening, setIsListening] = useState(false);
   const microphoneRef = useRef(null);
   const [mic,setMic]=useState(false);
@@ -21,7 +23,7 @@ function Header() {
     {
       command: "google * video",
       callback: (sng) => {
-        search(sng);
+        search(sng,false);
         // setIsAudio(false);
       },
     },
@@ -29,7 +31,7 @@ function Header() {
       command: "google * audio",
       callback: (sng) => {
         // setIsAudio(true);
-        search(sng);
+        search(sng,true);
       },
     },
     {
@@ -72,7 +74,7 @@ function Header() {
     stopHandle();
     resetTranscript();
   };
-  const search = (song) => {
+  const search = (song,audio) => {
     // setid("");
     const apiUrl =
       "https://www.googleapis.com/youtube/v3/search?key=" +
@@ -80,18 +82,37 @@ function Header() {
       "&q=" +
       song +
       "&part=snippet,id&maxResults=20";
-    // fetch(apiUrl)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     setid(data["items"][0]["id"]["videoId"]);
-    //     setTitle(data["items"][0]["snippet"]["title"]);
-    //     setArtist(data["items"][0]["snippet"]["channelTitle"]);
-    //     setthumbnail(data["items"][0]["snippet"]["thumbnails"]["high"]["url"]);
-    //   });
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch({
+          type:"SET_ID",
+          id:data["items"][0]["id"]["videoId"],
+        }); dispatch({
+          type:"SET_TITLE",
+          title:data["items"][0]["snippet"]["title"],
+        });dispatch({
+          type:"SET_ARTIST",
+          artist:data["items"][0]["snippet"]["channelTitle"],
+        })
+        dispatch({
+          type:"SET_CONTENT_TYPE",
+          isaudio:audio,
+        })
+        dispatch({
+          type:"SET_THUMBNAIL",
+          thumbnail:data["items"][0]["snippet"]["thumbnails"]["high"]["url"],
+        })
+        // setid(data["items"][0]["id"]["videoId"]);
+        // setTitle(data["items"][0]["snippet"]["title"]);
+        // setArtist(data["items"][0]["snippet"]["channelTitle"]);
+        // setthumbnail(data["items"][0]["snippet"]["thumbnails"]["high"]["url"]);
+      });
     // setid(response["items"][7]["id"]["videoId"]);
     // setTitle(response["items"][7]["snippet"]["title"]);
     // setArtist(response["items"][7]["snippet"]["channelTitle"]);
     // setthumbnail(response["items"][7]["snippet"]["thumbnails"]["high"]["url"]);
+   
      console.log(song);
     
   };
@@ -100,7 +121,7 @@ function Header() {
     <div className="header">
       <div className="header_left">
         <img className='website_logo' src='https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1934&q=80' alt=' Logo'></img>
-        <p>Website</p>
+        <p>Rythm</p>
       </div>
       <div className="header_center">
         <div className='search_bar'>
