@@ -7,6 +7,8 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { auth,db } from "./firebase";
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 function Music() {
     
     return (
@@ -70,6 +72,8 @@ function MusicTile({item}) {
         
         </div>
         <div className='musicCard__right'>
+          <FavoriteIcon className='fav_icon'/>
+          {/* <FavoriteBorderIcon/> */}
         <IconButton
         aria-label="more"
         aria-controls="long-menu"

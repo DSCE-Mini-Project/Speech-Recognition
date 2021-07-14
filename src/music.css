@@ -35,7 +35,7 @@
     
 }
 .musicCard__info{
-    flex: 0.5;
+    flex: 0.6;
 }
 
 .musiccard_title{
@@ -46,8 +46,13 @@
    -webkit-box-orient: vertical;
 }
 .musicCard__right{
-    flex:0.3;
-    justify-content: start;
+    flex:0.2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.fav_icon{
+    color: red;
 }
 .icon_button{
     color: white !important;
