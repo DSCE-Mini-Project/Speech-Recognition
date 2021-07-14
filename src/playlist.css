@@ -27,40 +27,41 @@
     overflow: auto;
     height: 100%;
 }
-.music_tile{
+.music__tile{
     height: 70px;
     cursor: pointer;
     display: flex;
     width: 45%;
-    
+    align-items: center;
     margin: 20px;
-  
+    margin-left: 35px;
+    justify-content: space-evenly;
     border-radius: 20px;
     -webkit-box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
     
 }
-.music_tile:hover {
+.music__tile:hover {
     transition: transform 0.2s ease-in-out;
     transform: scale(1.1) !important;
   }
-.musicCard_left{
+.musicCard__left{
     flex:0.1;
 }
-.musiccard_thumbnail{
+.musiccard__thumbnail{
     height:90%;
     width: 80%;
     
 }
-.musicCard_info{
+.musicCard__info{
     flex: 0.6;
 }
-.musicCard_right{
+.musicCard__right{
     flex:0.2;
-    align-items: center;
     display: flex;
-    justify-content: right;
+    align-items: center;
+    justify-content: space-between;
 }
-h4{
+.musiccard__title{
     overflow: hidden;
     text-overflow: ellipsis;
    display: -webkit-box;
@@ -69,7 +70,6 @@ h4{
 }
 .video_option{
     display: flex;
-
     align-items: center;
     justify-content: space-between;
 }

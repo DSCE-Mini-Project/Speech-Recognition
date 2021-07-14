@@ -136,7 +136,7 @@ function Speech_recognition() {
           </div>
           <div className="option" onClick={() => setOption(3)}>
             <ThumbUpAltIcon />
-            <p className="title">Liked Videos</p>
+            <p className="title">Favourites</p>
           </div>
           <div className="option" onClick={() => setOption(4)}>
             <PlaylistPlayIcon />

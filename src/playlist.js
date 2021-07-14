@@ -211,19 +211,19 @@ function MusicTile({ id, channeltitle, duration, title, url,did }) {
   const options = ["Remove"];
   return (
     <div
-      className="music_tile"
+      className="music__tile"
       onClick={() => {
         setvalues();
       }}
     >
-      <div className="musicCard_left">
-        <img className="musiccard_thumbnail" src={url}></img>
+      <div className="musicCard__left">
+        <img className="musiccard__thumbnail" src={url}></img>
       </div>
-      <div className="musicCard_info">
-        <h4>{title}</h4>
+      <div className="musicCard__info">
+        <h4 className="musiccard__title">{title}</h4>
         <p>{channeltitle}</p>
       </div>
-      <div className="musicCard_right">
+      <div className="musicCard__right">
         <p>{duration}</p>
         <IconButton
           aria-label="more"

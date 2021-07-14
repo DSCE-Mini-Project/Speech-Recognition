@@ -6,6 +6,11 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import "./liked.css";
 import { auth, db } from "./firebase";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import IconButton from "@material-ui/core/IconButton";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 function Liked() {
   const [{ uid }, dispatch] = useDataLayerValue();
   const [value, setValue] = useState("music");
@@ -18,7 +23,11 @@ function Liked() {
       .doc(uid)
       .collection(value)
       .onSnapshot((snapshot) =>
-        setFavvideos(snapshot.docs.map((doc) => doc.data()))
+        setFavvideos(snapshot.docs.map((doc) => {
+          const data = doc.data();
+          data.did = doc.id;
+          return data;
+        }))
       );
   }, [value]);
   return (
@@ -38,22 +47,24 @@ function Liked() {
       </div>
       <div className="liked_items">
         {value == "video"
-          ? favvideos.map(({ id, channeltitle, duration, title, url }) => (
+          ? favvideos.map(({ id, channeltitle, duration, title, url,did }) => (
               <VideoTile
                 id={id}
                 channeltitle={channeltitle}
                 duration={duration}
                 title={title}
                 url={url}
+                did={did}
               ></VideoTile>
             ))
-          : favvideos.map(({ id, channeltitle, duration, title, url }) => (
+          : favvideos.map(({ id, channeltitle, duration, title, url,did }) => (
               <MusicTile
                 id={id}
                 channeltitle={channeltitle}
                 duration={duration}
                 title={title}
                 url={url}
+                did={did}
               ></MusicTile>
             ))}
       </div>
@@ -63,8 +74,8 @@ function Liked() {
 
 export default Liked;
 
-function VideoTile({ id, channeltitle, duration, title, url }) {
-  const[{},dispatch]=useDataLayerValue();
+function VideoTile({ id, channeltitle, duration, title, url ,did}) {
+  const[{uid},dispatch]=useDataLayerValue();
     const setvalues=()=>{
       dispatch({
         type:"SET_ID",
@@ -85,6 +96,22 @@ function VideoTile({ id, channeltitle, duration, title, url }) {
         isaudio:false,
       });
     }
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+  
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+    const handleClose = (option) => {
+      console.log(option);
+      db.collection('favourite').doc(uid).collection('video').doc(did).delete().then(()=>{
+        console.log("Document successfully deleted!");
+      }).catch((error) => {
+        console.error("Error removing document: ", error);
+    });
+      setAnchorEl(null);
+    };
+    const options = ["Remove"];
   return (
     <div className="video_tile" onClick={()=>{setvalues()}}>
       <img className="videocard_thumbnail" src={url}></img>
@@ -92,14 +119,49 @@ function VideoTile({ id, channeltitle, duration, title, url }) {
       <div className="videoCard_info">
         <h4>{title}</h4>
         <p>{channeltitle}</p>
-        <p>{duration}</p>
+        <div className='video_option'>
+      <p>{duration}</p>
+      <IconButton
+          aria-label="more"
+          aria-controls="long-menu"
+          aria-haspopup="true"
+          className="icon_button"
+          onClick={handleClick}
+        >
+          <MoreVertIcon />
+        </IconButton>
+        <Menu
+          id="long-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={open}
+          onClose={handleClose}
+          PaperProps={{
+            style: {
+              maxHeight: 200 * 4.5,
+              width: "20ch",
+            },
+          }}
+        >
+          {options.map((option) => (
+            <MenuItem
+              key={option}
+              selected={option === "Playlist"}
+              onClick={() => handleClose(option)}
+            >
+              {option}
+            </MenuItem>
+          ))}
+        </Menu>
+      </div>
+      
       </div>
     </div>
   );
 }
 
-function MusicTile({ id, channeltitle, duration, title, url }) {
-   const[{},dispatch]=useDataLayerValue();
+function MusicTile({ id, channeltitle, duration, title, url,did }) {
+   const[{uid},dispatch]=useDataLayerValue();
     const setvalues=()=>{
       dispatch({
         type:"SET_ID",
@@ -120,6 +182,13 @@ function MusicTile({ id, channeltitle, duration, title, url }) {
         isaudio:true,
       });
     }
+    const remove= ()=>{
+      db.collection('favourite').doc(uid).collection('music').doc(did).delete().then(()=>{
+        console.log("Document successfully deleted!");
+      }).catch((error) => {
+        console.error("Error removing document: ", error);
+    });
+    }
   return (
     <div className="music_tile" onClick={()=>{setvalues()}}>
       <div className="musicCard_left">
@@ -131,7 +200,9 @@ function MusicTile({ id, channeltitle, duration, title, url }) {
         
       </div>
       <div className="musicCard_right">
+      
         <p>{duration}</p>
+        <FavoriteIcon className="fav_icon" onClick={remove}/>
       </div>
     </div>
   );

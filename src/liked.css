@@ -55,6 +55,7 @@
     flex: 0.5;
 }
 .musicCard_right{
-    flex:0.3;
-    justify-content: start;
+    flex:0.2;
+    justify-content:space-around;
+    align-self: center;
 }
