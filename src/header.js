@@ -11,17 +11,23 @@ import SpeechRecognition, {
 import API_key from "./keys";
 import MicOffIcon from '@material-ui/icons/MicOff';
 import {useDataLayerValue} from './DataLayer';
+import { auth, db, storage } from "./firebase";
 function timeout(delay) {
   return new Promise((res) => setTimeout(res, delay));
 }
 function Header() {
   useEffect(() => {
     handleListing()
+    db.collection('profile').doc(uid).get().then(
+      (snapshot)=>setUserdata(snapshot.data())
+    ).catch((e) => console.log(e))
+    console.log(userdata)
   }, [])
   const[{uid},dispatch]=useDataLayerValue();
   const [isListening, setIsListening] = useState(false);
   const microphoneRef = useRef(null);
   const [mic,setMic]=useState(false);
+  const [userdata,setUserdata]=useState([])
   const commands = [
     {
       command: "rhythm * video",
@@ -119,7 +125,9 @@ function Header() {
      console.log(transcript);
     
   };
-
+ 
+   
+  
   return (
     <div className="header">
       <div className="header_left">
@@ -136,8 +144,8 @@ function Header() {
       </div>
       <div className="header_right">
         
-        <h5>username</h5>
-      <img className='profile_pic' src='https://images.unsplash.com/photo-1624916889482-f94b10311333?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1868&q=80' alt=' Profile pic'></img>
+        <h5>{userdata.username}</h5>
+      <img className='profile_pic' src={userdata.url} alt=' Profile pic'></img>
       <img className='emotion' src='https://images.unsplash.com/photo-1565945887714-d5139f4eb0ce?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80' alt=' Profile pic'></img>
       </div>
     </div>
