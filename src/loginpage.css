@@ -23,6 +23,22 @@
   margin-left: 28px;
   margin-bottom: 50px;
 }
+.upload_image{
+  width: 80%;
+  display: flex;
+  justify-content: center;
+}
+.dp{
+  width: 100px;
+  height:100px;
+  border-radius: 50%;
+}
+.image_select{
+  height: 100px;
+  width: 100px;
+  border-radius: 100%;
+}
+
 .username_box{
   width: 80%;
   border: 1px solid #625cff;

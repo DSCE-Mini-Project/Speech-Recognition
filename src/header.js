@@ -15,20 +15,23 @@ function timeout(delay) {
   return new Promise((res) => setTimeout(res, delay));
 }
 function Header() {
+  useEffect(() => {
+    handleListing()
+  }, [])
   const[{uid},dispatch]=useDataLayerValue();
   const [isListening, setIsListening] = useState(false);
   const microphoneRef = useRef(null);
   const [mic,setMic]=useState(false);
   const commands = [
     {
-      command: "google * video",
+      command: "rhythm * video",
       callback: (sng) => {
         search(sng,false);
         // setIsAudio(false);
       },
     },
     {
-      command: "google * audio",
+      command: "rhythm * audio",
       callback: (sng) => {
         // setIsAudio(true);
         search(sng,true);
@@ -113,7 +116,7 @@ function Header() {
     // setArtist(response["items"][7]["snippet"]["channelTitle"]);
     // setthumbnail(response["items"][7]["snippet"]["thumbnails"]["high"]["url"]);
    
-     console.log(song);
+     console.log(transcript);
     
   };
 
@@ -133,7 +136,7 @@ function Header() {
       </div>
       <div className="header_right">
         
-        <h5>Username</h5>
+        <h5>username</h5>
       <img className='profile_pic' src='https://images.unsplash.com/photo-1624916889482-f94b10311333?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1868&q=80' alt=' Profile pic'></img>
       <img className='emotion' src='https://images.unsplash.com/photo-1565945887714-d5139f4eb0ce?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80' alt=' Profile pic'></img>
       </div>

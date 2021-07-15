@@ -5,23 +5,26 @@ import HttpsOutlinedIcon from "@material-ui/icons/HttpsOutlined";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import Button from "@material-ui/core/Button";
 import { Link, useHistory } from "react-router-dom";
-import { auth,db } from "./firebase";
+import { auth, db, storage } from "./firebase";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import {useDataLayerValue} from './DataLayer';
-
+import { useDataLayerValue } from "./DataLayer";
+import PersonIcon from '@material-ui/icons/Person';
+import Person from "@material-ui/icons/Person";
 function Loginpage() {
   const [open, setOpen] = useState(false);
-  const[{uid},dispatch]=useDataLayerValue();
+  const [{ uid }, dispatch] = useDataLayerValue();
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [signin, setSignin] = useState(false);
+  const [image, setImage] = useState("");
+  const [previewimg,setPreview]=useState("");
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -43,11 +46,9 @@ function Loginpage() {
       .signInWithEmailAndPassword(email, password)
       .then((auth) => {
         dispatch({
-          type:"SET_UID",
-          uid:auth.user.uid,
+          type: "SET_UID",
+          uid: auth.user.uid,
         });
-        console.log(auth);
-        db.collection('profile').doc(auth.user.uid).set({name:auth.user.uid})
         history.push("/speech_recognition");
       })
       .catch((error) => alert(error.message));
@@ -58,20 +59,38 @@ function Loginpage() {
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((auth) => {
-        // it successfully created a new user with email and password
         if (auth) {
+          dispatch({
+            type: "SET_UID",
+            uid: auth.user.uid,
+          });
+          
+          storage
+            .ref(`/profile/${auth.user.uid}`)
+            .put(image)
+            .on("state_changed", alert("user created"),alert,()=>{
+              storage.ref("profile").child(auth.user.uid).getDownloadURL()
+            .then((url) => {
+              db.collection("profile")
+            .doc(auth.user.uid)
+            .set({ username: username,'url':url });
+             })
+            });        
+          
           history.push("/speech_recognition");
         }
       })
       .catch((error) => alert(error.message));
   };
-  const resetpassword=(e)=>{
+  const resetpassword = (e) => {
     e.preventDefault();
-    auth.sendPasswordResetEmail(email)
-    .then((auth)=>{
-      handleClose()
-    }).catch((error)=>alert(error.message))
-  }
+    auth
+      .sendPasswordResetEmail(email)
+      .then((auth) => {
+        handleClose();
+      })
+      .catch((error) => alert(error.message));
+  };
   return (
     <div className="login">
       <div className="image"></div>
@@ -82,6 +101,31 @@ function Loginpage() {
           ) : (
             <h2 className="login_title"> Log In </h2>
           )}
+          {signin ? (
+            <div className='upload_image'>
+              <Button
+                variant="contained"
+                component="label"
+                style={{ borderRadius: 50 }}
+                className="image_select"
+              >
+                {image!='' ? <img src={previewimg} className='dp'></img>:<PersonIcon style={{ fontSize: 40 }} className='person_icon'></PersonIcon>}
+
+                <input
+                  type="file"
+                  hidden
+                  onChange={(e) => {
+                    setPreview(URL.createObjectURL(e.target.files[0]));
+                    setImage(e.target.files[0]);  
+                  }}
+                />
+          
+              </Button>
+            </div>
+          ) : (
+            <div></div>
+          )}
+
           {signin ? (
             <div className="username_box">
               <div className="username_icon">
@@ -171,7 +215,9 @@ function Loginpage() {
             </p>
           )}
           <p className="forgot">
-            <span className="forgot_password" onClick={handleClickOpen}>Forgot password?</span>
+            <span className="forgot_password" onClick={handleClickOpen}>
+              Forgot password?
+            </span>
           </p>
           <Dialog
             open={open}
@@ -181,7 +227,8 @@ function Loginpage() {
             <DialogTitle id="form-dialog-title">Reset Password</DialogTitle>
             <DialogContent>
               <DialogContentText>
-                Reset password link will be sent to your email id click on the link and reset your password .
+                Reset password link will be sent to your email id click on the
+                link and reset your password .
               </DialogContentText>
               <TextField
                 autoFocus
@@ -197,7 +244,11 @@ function Loginpage() {
               <Button onClick={handleClose} color="primary">
                 Cancel
               </Button>
-              <Button variant="contained"onClick={resetpassword} color="primary">
+              <Button
+                variant="contained"
+                onClick={resetpassword}
+                color="primary"
+              >
                 Confirm
               </Button>
             </DialogActions>

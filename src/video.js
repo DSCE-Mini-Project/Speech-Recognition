@@ -50,9 +50,9 @@ const handleClose = (option) => {
 
 };
 const options = [
+  'favourite',
   'playlist',
   'queue',
-  
 ];
     const setvalues=()=>{
       dispatch({

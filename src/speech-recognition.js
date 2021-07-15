@@ -44,58 +44,58 @@ function Speech_recognition() {
   // const [thumbnail, setthumbnail] = useState("");
   const [option, setOption] = useState("1");
   const microphoneRef = useRef(null);
-  const commands = [
-    {
-      command: "google * video",
-      callback: (sng) => {
-        search(sng);
-        // setIsAudio(false);
-      },
-    },
-    {
-      command: "google * audio",
-      callback: (sng) => {
-        // setIsAudio(true);
-        search(sng);
-      },
-    },
-    {
-      command: "clear",
-      callback: async ({ resetTranscript }) => {
-        handleReset();
-        await timeout(1000);
-        handleListing();
-      },
-    },
-  ];
+  // const commands = [
+  //   {
+  //     command: "google * video",
+  //     callback: (sng) => {
+  //       search(sng);
+  //       // setIsAudio(false);
+  //     },
+  //   },
+  //   {
+  //     command: "google * audio",
+  //     callback: (sng) => {
+  //       // setIsAudio(true);
+  //       search(sng);
+  //     },
+  //   },
+  //   {
+  //     command: "clear",
+  //     callback: async ({ resetTranscript }) => {
+  //       handleReset();
+  //       await timeout(1000);
+  //       handleListing();
+  //     },
+  //   },
+  // ];
 
-  const { transcript, resetTranscript } = useSpeechRecognition({ commands });
-  if (
-    !SpeechRecognition.browserSupportsSpeechRecognition({ continuous: true })
-  ) {
-    return (
-      <div className="mircophone-container">
-        Browser is not Support Speech Recognition.
-      </div>
-    );
-  }
+  // const { transcript, resetTranscript } = useSpeechRecognition({ commands });
+  // if (
+  //   !SpeechRecognition.browserSupportsSpeechRecognition({ continuous: true })
+  // ) {
+  //   return (
+  //     <div className="mircophone-container">
+  //       Browser is not Support Speech Recognition.
+  //     </div>
+  //   );
+  // }
 
-  const handleListing = () => {
-    setIsListening(true);
-    microphoneRef.current.classList.add("listening");
-    SpeechRecognition.startListening({
-      continuous: true,
-    });
-  };
-  const stopHandle = () => {
-    setIsListening(false);
-    microphoneRef.current.classList.remove("listening");
-    SpeechRecognition.stopListening();
-  };
-  const handleReset = () => {
-    stopHandle();
-    resetTranscript();
-  };
+  // const handleListing = () => {
+  //   setIsListening(true);
+  //   microphoneRef.current.classList.add("listening");
+  //   SpeechRecognition.startListening({
+  //     continuous: true,
+  //   });
+  // };
+  // const stopHandle = () => {
+  //   setIsListening(false);
+  //   microphoneRef.current.classList.remove("listening");
+  //   SpeechRecognition.stopListening();
+  // };
+  // const handleReset = () => {
+  //   stopHandle();
+  //   resetTranscript();
+  // };
   const search = (song) => {
     // setid("");
     const apiUrl =
