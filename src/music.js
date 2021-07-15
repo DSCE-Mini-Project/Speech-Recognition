@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useRef, useState } from "react";
 import "./music.css";
 import response_music from "./response_music";
 import { useDataLayerValue } from "./DataLayer";
@@ -9,10 +10,22 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { auth, db } from "./firebase";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+
+const apiUrl ="https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&regionCode=IN&videoCategoryId=10&key=AIzaSyA_-pgGuPTYypNGox45JMcC0u86u87Tu8I&maxResults=30"  
+
 function Music() {
+   var [data,setData]=useState([]);
+  useEffect(() => {
+    fetch(apiUrl)
+    .then((response) => response.json())
+    .then((body)=>setData(body.items.map((item)=>{return item})))
+    
+  }, [])
+
+ 
   return (
     <div className="music">
-      {response_music.items.map((item) => (
+      {data.map((item) => (
         <MusicTile item={item} />
       ))}
     </div>

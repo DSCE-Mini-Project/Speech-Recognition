@@ -1,10 +1,14 @@
 .queue{
     margin-top: 10px;
 }
-.radio{
+.radio_options{
     width: 95%;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+}
+.play_button{
+    margin-right: 30px;
 }
 .liked::-webkit-scrollbar {
     display: none;

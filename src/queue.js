@@ -10,6 +10,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 function Queue() {
     const [{ uid }, dispatch] = useDataLayerValue();
     const [value, setValue] = useState("music");
@@ -31,7 +32,10 @@ function Queue() {
     }, [value]);
     return (
       <div className="queue">
-        <div className="radio">
+        
+        <div className="radio_options">
+          <div className='play_button'><PlayCircleOutlineIcon style={{fontSize:'40'}}/></div>
+          <div className='radio_buttons'>
           <RadioGroup
             aria-label="type"
             name="type"
@@ -43,6 +47,7 @@ function Queue() {
             <FormControlLabel value="music" control={<Radio />} label="music" />
             <FormControlLabel value="video" control={<Radio />} label="video" />
           </RadioGroup>
+          </div>
         </div>
         <div className="queue_items">
           {value == "video"

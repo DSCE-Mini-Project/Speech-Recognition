@@ -10,23 +10,19 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { auth,db } from "./firebase";
+const apiUrl ="https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&key=AIzaSyA_-pgGuPTYypNGox45JMcC0u86u87Tu8I&maxResults=100" ;
 function Video() {
-  const [videos,setVideos]=useState([])
-  // useEffect(() => {
-  //   getvideos();
-  //   }, []);
-  const getvideos=()=>{
-    // const apiurl='https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&key=AIzaSyA_-pgGuPTYypNGox45JMcC0u86u87Tu8I&maxResults=100';
-    // fetch(apiurl)
-    // .then((response) => response.json())
-    // .then((data)=>console.log(data))
-    // .catch((error)=>console.log(error))
-    
-  
-  }
+  const [data,setData]=useState([]);
+  useEffect(() => {
+    fetch(apiUrl)
+    .then((response) => response.json())
+    .then((body)=>setData(body.items.map((item)=>{return item})))
+    console.log(data)
+    }, []);
+   
     return (
         <div className="video">
-          {response_video.items.map((item)=><VideoTile item={item} ></VideoTile>)}
+          {data.map((item)=><VideoTile item={item} ></VideoTile>)}
           
         </div>
     )

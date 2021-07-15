@@ -21,7 +21,7 @@ function Header() {
     db.collection('profile').doc(uid).get().then(
       (snapshot)=>setUserdata(snapshot.data())
     ).catch((e) => console.log(e))
-    console.log(userdata)
+  
   }, [])
   const[{uid},dispatch]=useDataLayerValue();
   const [isListening, setIsListening] = useState(false);
