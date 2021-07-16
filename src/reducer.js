@@ -7,6 +7,8 @@ export const initialState = {
     thumbnail:null,
     isaudio:null,
     volume:30,
+    queuenum:0,
+    queuelen:0,
 };
 const reducer = (state, action) => {
     console.log(action);
@@ -50,6 +52,16 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 volume:action.volume
+            }
+        case "SET_QUEUENUM":
+            return {
+                ...state,
+                queuenum:action.queuenum
+            }
+        case "SET_QUEUELEN":
+            return {
+                ...state,
+                queuelen:action.queuelen
             }
         default:
             return state;

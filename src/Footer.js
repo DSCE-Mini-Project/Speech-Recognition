@@ -16,7 +16,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { useDataLayerValue } from "./DataLayer";
 function Footer({thumbnail,id,title,artist}) {
-    const [{volume}, dispatch] = useDataLayerValue();
+    const [{volume,queuenum,queuelen}, dispatch] = useDataLayerValue();
     const [playing, setPlaying] = useState(true);
     const [loop,setLoop]=useState(false);
     const [elapsed,setElapsed]=useState('0:00');
@@ -48,14 +48,14 @@ function Footer({thumbnail,id,title,artist}) {
     }
     const getduration=(dur)=>{
         var min=Math.floor(dur/60);
-        var sec=dur-(min*60)
+        var sec=parseInt(dur-(min*60)).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
         setDuration(min+':'+sec);
         setDurationsec(Math.ceil(dur));
     }
     const playingtime=(tme)=>{
         var elapsedtime=Math.ceil(tme.playedSeconds);
         var min=Math.floor(elapsedtime/60);
-        var sec=elapsedtime-(min*60);
+        var sec=parseInt(elapsedtime-(min*60)).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
         setElapsed(min+':'+sec);
         setElapsedsec(Math.ceil(tme.playedSeconds));
     }
@@ -67,6 +67,24 @@ function Footer({thumbnail,id,title,artist}) {
         })
         // setVolume(newValue);
       };
+    function playnextsong(){
+        
+        dispatch({
+            type:"SET_QUEUENUM",
+            queuenum:queuenum+1,
+        })
+        console.log('next song')
+    }
+    function playprevsong() {
+        if(queuenum!=0){
+        dispatch({
+            type:"SET_QUEUENUM",
+            queuenum:queuenum-1,
+        })
+        console.log('prev song')
+    }
+        
+    }
     return (
         <div className='footer'>
         <div className="footer__left">
@@ -83,9 +101,9 @@ function Footer({thumbnail,id,title,artist}) {
             onReady={(e) => e.target.playVideo()}
           />  */} 
           <div className='control_icons'>
-          <SkipPreviousIcon className="footer__icon" />
+          <SkipPreviousIcon className="footer__icon" onClick={()=>{playprevsong()}}/>
             {playing?<PauseCircleOutlineIcon fontSize="large" className="footer__icon" onClick={toggle_playing}/>:<PlayCircleOutlineIcon fontSize="large" onClick={toggle_playing} className="footer__icon" />}
-            <SkipNextIcon className="footer__icon" />
+            <SkipNextIcon className="footer__icon" onClick={()=>{playnextsong()}}/>
             {loop==false?<RepeatIcon className="footer__black" onClick={toggleloop}/>:<RepeatIcon className="footer__blue" onClick={toggleloop}/>}
             </div>
         </div>
