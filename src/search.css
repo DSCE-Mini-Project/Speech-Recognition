@@ -1,12 +1,11 @@
-.music{
+.search{
     display: flex;
     flex-wrap: wrap;
     overflow: auto;
     height: 100%;
-    margin-top: 20px;
-   
+    margin-top: 20px;  
 }
-.music::-webkit-scrollbar {
+.search::-webkit-scrollbar {
     display: none;
 }
 .music__tile{

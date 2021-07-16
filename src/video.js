@@ -75,7 +75,7 @@ const options = [
       <h4>{item.snippet.title}</h4>
       <p>{item.snippet.channelTitle}</p>
       <div className='videocard_option'>
-      <p>{item.snippet.publishedAt}</p>
+      <p>{item.snippet.publishedAt.split('T')[0]+' '+item.snippet.publishedAt.split('T')[1].slice(0, -1)}</p>
       <IconButton
         aria-label="more"
         aria-controls="long-menu"

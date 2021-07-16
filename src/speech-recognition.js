@@ -24,17 +24,19 @@ import Playlist from "./playlist";
 import Queue from "./queue";
 import { useDataLayerValue } from "./DataLayer";
 import Footer_video from "./footer_video";
+import Search from "./search";
 function timeout(delay) {
   return new Promise((res) => setTimeout(res, delay));
 }
 function Speech_recognition() {
   const [song, setSong] = useState("");
-  const [{ uid, id, title, artist, isaudio,thumbnail}, dispatch] = useDataLayerValue();
+  const [{ uid, id, title, artist, isaudio, thumbnail,option }, dispatch] =
+    useDataLayerValue();
   useEffect(() => {
     // handleListing();
     //console.log(id);
     //search();
-  }, [id,isaudio]);
+  }, [id, isaudio]);
 
   const [isListening, setIsListening] = useState(false);
   // const [isaudio, setIsAudio] = useState(false);
@@ -42,7 +44,7 @@ function Speech_recognition() {
   // const [title, setTitle] = useState("");
   // const [artist, setArtist] = useState("");
   // const [thumbnail, setthumbnail] = useState("");
-  const [option, setOption] = useState("1");
+  // const [option, setOption] = useState("1");
   const microphoneRef = useRef(null);
   // const commands = [
   //   {
@@ -126,23 +128,63 @@ function Speech_recognition() {
       </div>
       <div className="home_center">
         <div className="home_center_left">
-          <div className="option" onClick={() => setOption(1)}>
+          <div
+            className="option"
+            onClick={() =>
+              dispatch({
+                type: "SET_OPTION",
+                option: 1,
+              })
+            }
+          >
             <MusicNoteIcon />
             <p className="title">Music</p>
           </div>
-          <div className="option" onClick={() => setOption(2)}>
+          <div
+            className="option"
+            onClick={() =>
+              dispatch({
+                type: "SET_OPTION",
+                option: 2,
+              })
+            }
+          >
             <YouTubeIcon />
             <p className="title">Videos</p>
           </div>
-          <div className="option" onClick={() => setOption(3)}>
+          <div
+            className="option"
+            onClick={() =>
+              dispatch({
+                type: "SET_OPTION",
+                option: 3,
+              })
+            }
+          >
             <ThumbUpAltIcon />
             <p className="title">Favourites</p>
           </div>
-          <div className="option" onClick={() => setOption(4)}>
+          <div
+            className="option"
+            onClick={() =>
+              dispatch({
+                type: "SET_OPTION",
+                option: 4,
+              })
+            }
+          >
             <PlaylistPlayIcon />
             <p className="title">Playlist</p>
           </div>
-          <div className="option" onClick={() => setOption(5)}>
+          <div
+            className="option"
+            onClick={() =>
+              dispatch({
+                type: "SET_OPTION",
+                option: 5,
+              })
+            }
+          >
             <QueueIcon />
             <p className="title">Queue</p>
           </div>
@@ -153,21 +195,21 @@ function Speech_recognition() {
           {option == 3 ? <Liked /> : <div />}
           {option == 4 ? <Playlist /> : <div />}
           {option == 5 ? <Queue /> : <div />}
+          {option == 6 ? <Search /> : <div />}
         </div>
       </div>
 
-      
-        {isaudio == false &&   id!=null ? 
-          <Footer_video id={id} title={title} artist={artist}></Footer_video>
-         : 
-          <Footer
-            className="music_player"
-            thumbnail={thumbnail}
-            id={id}
-            title={title}
-            artist={artist}
-          ></Footer>
-        }
+      {isaudio == false && id != null ? (
+        <Footer_video id={id} title={title} artist={artist}></Footer_video>
+      ) : (
+        <Footer
+          className="music_player"
+          thumbnail={thumbnail}
+          id={id}
+          title={title}
+          artist={artist}
+        ></Footer>
+      )}
     </div>
   );
 }
