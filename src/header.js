@@ -23,6 +23,7 @@ function Header() {
       .get()
       .then((snapshot) => setUserdata(snapshot.data()))
       .catch((e) => console.log(e));
+      getemotion();
   }, []);
   const [{ uid }, dispatch] = useDataLayerValue();
   const [isListening, setIsListening] = useState(false);
@@ -85,15 +86,15 @@ function Header() {
     stopHandle();
     resetTranscript();
   };
-  function setkeyword(){
+  function setkeyword() {
     dispatch({
       type: "SET_OPTION",
       option: 6,
-    })
+    });
     dispatch({
-      type:"SET_KEYWORD",
-      keyword:searchkey,
-    })
+      type: "SET_KEYWORD",
+      keyword: searchkey,
+    });
   }
   const search = (song, audio) => {
     // setid("");
@@ -135,10 +136,12 @@ function Header() {
     // setTitle(response["items"][7]["snippet"]["title"]);
     // setArtist(response["items"][7]["snippet"]["channelTitle"]);
     // setthumbnail(response["items"][7]["snippet"]["thumbnails"]["high"]["url"]);
-
-    console.log(transcript);
   };
-
+  const getemotion = () => {
+    fetch("http://127.0.0.1:5000/")
+      .then((response) => response.json())
+      .then((data) => console.log(data.result));
+  };
   return (
     <div className="header">
       <div className="header_left">
@@ -156,10 +159,7 @@ function Header() {
             type="text"
             className="search_text"
             placeholder="Search for songs,videos and ..."
-            onKeyPress={(e) =>
-              e.key === "Enter" &&
-             setkeyword()
-            }
+            onKeyPress={(e) => e.key === "Enter" && setkeyword()}
             onChange={(e) => setSearchkey(e.target.value)}
           ></input>
         </div>
