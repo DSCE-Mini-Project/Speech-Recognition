@@ -45,6 +45,9 @@
 .search_text::placeholder{
     color: whitesmoke;
 }
+.mic{
+    cursor: pointer;
+}
 .header_right{
     flex: 0.2;
     display: flex;
@@ -64,4 +67,16 @@ h4{
 h1{
   
     margin-right: 30px;
+}
+.updateimg{
+    
+    width: 100px;
+    height:100px;
+    border-radius: 50%;
+}
+.update_image{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 300px;
 }
