@@ -15,6 +15,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { useDataLayerValue } from "./DataLayer";
 import PersonIcon from '@material-ui/icons/Person';
 import Person from "@material-ui/icons/Person";
+import FlareComponent from 'flare-react';
 function Loginpage() {
   const [open, setOpen] = useState(false);
   const [{ uid }, dispatch] = useDataLayerValue();
@@ -93,7 +94,9 @@ function Loginpage() {
   };
   return (
     <div className="login">
-      <div className="image"></div>
+      <div className="image">
+      <FlareComponent width={400} height={400} animationName='headphones' file="headphones.flr"/>
+      </div>
       <div className="details">
         <div className="centered">
           {signin ? (
