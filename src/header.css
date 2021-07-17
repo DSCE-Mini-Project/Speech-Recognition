@@ -51,18 +51,17 @@
     align-items: center;
     justify-content: flex-end;
 }
-h5{
-    margin-right: 10px  ;
+h4{
+    margin-right: 20px  ;
 }
 .profile_pic{
     height:40px;
     width: 40px;
     border-radius: 100px;
     margin-right: 20px;
+    cursor: pointer;
 }
-.emotion{
-    height:40px;
-    width: 40px;
-    border-radius: 100px;
+h1{
+  
     margin-right: 30px;
 }

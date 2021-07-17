@@ -31,6 +31,8 @@ function Header() {
   const [mic, setMic] = useState(false);
   const [userdata, setUserdata] = useState([]);
   const [searchkey, setSearchkey] = useState("");
+  const [emotion,setEmotion]=useState('happy');
+  var emotion_emoji={'happy':'😄','angry':'😡','sad':'🙁','calm':'🙂'}
   const commands = [
     {
       command: "rhythm * video",
@@ -140,7 +142,7 @@ function Header() {
   const getemotion = () => {
     fetch("http://127.0.0.1:5000/")
       .then((response) => response.json())
-      .then((data) => console.log(data.result));
+      .then((data) => setEmotion(data.result));
   };
   return (
     <div className="header">
@@ -170,17 +172,14 @@ function Header() {
         )}
       </div>
       <div className="header_right">
-        <h5>{userdata.username}</h5>
+        
         <img
           className="profile_pic"
           src={userdata.url}
           alt=" Profile pic"
         ></img>
-        <img
-          className="emotion"
-          src="https://images.unsplash.com/photo-1565945887714-d5139f4eb0ce?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
-          alt=" Profile pic"
-        ></img>
+        <h4>{userdata.username}</h4>
+        <h1>{emotion_emoji[emotion]}</h1>
       </div>
     </div>
   );
