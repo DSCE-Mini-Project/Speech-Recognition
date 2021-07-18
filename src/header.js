@@ -26,6 +26,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 import PersonIcon from "@material-ui/icons/Person";
+import FlareComponent from 'flare-react';
 function timeout(delay) {
   return new Promise((res) => setTimeout(res, delay));
 }
@@ -67,6 +68,7 @@ function Header() {
       .get()
       .then((snapshot) => setUserdata(snapshot.data()))
       .catch((e) => console.log(e));
+      // getemotion();
   }, [userdata]);
   const [{ uid }, dispatch] = useDataLayerValue();
   const [isListening, setIsListening] = useState(true);
@@ -135,6 +137,33 @@ function Header() {
         // setIsAudio(true);
         search(sng, true);
       },
+    },
+    {
+      command: "rhythm pause",
+      callback: () => 
+        dispatch({
+          type: "SET_PLAYING",
+          playing: false,
+        })
+      
+    },
+    {
+      command: "rhythm play",
+      callback: () => 
+        dispatch({
+          type: "SET_PLAYING",
+          playing: true,
+        })
+      
+    },
+    {
+      command: "rhythm set volume *",
+      callback: (vol) => 
+        dispatch({
+          type: "SET_VOLUME",
+          volume: vol,
+        })
+      
     },
     {
       command: "clear",
@@ -227,11 +256,7 @@ function Header() {
   return (
     <div className="header">
       <div className="header_left">
-        <img
-          className="website_logo"
-          src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1934&q=80"
-          alt=" Logo"
-        ></img>
+      <FlareComponent width={60} height={60} animationName='headphones'  transparent={true} file="headphones.flr" className='website_logo'/>
         <p>Rythm</p>
       </div>
       <div className="header_center">

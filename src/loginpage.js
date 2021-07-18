@@ -95,7 +95,7 @@ function Loginpage() {
   return (
     <div className="login">
       <div className="image">
-      <FlareComponent width={400} height={400} animationName='headphones' file="headphones.flr"/>
+      <FlareComponent width={400} height={400} animationName='headphones' transparent={true} file="headphones.flr"/>
       </div>
       <div className="details">
         <div className="centered">

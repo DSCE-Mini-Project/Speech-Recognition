@@ -11,6 +11,7 @@ export const initialState = {
   queuelen: 0,
   option: 1,
   keyword: null,
+  playing:true,
 };
 const reducer = (state, action) => {
   console.log(action);
@@ -74,6 +75,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         keyword: action.keyword,
+      };
+      case "SET_PLAYING":
+      return {
+        ...state,
+        playing: action.playing,
       };
     default:
       return state;

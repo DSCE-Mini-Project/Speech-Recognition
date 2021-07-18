@@ -16,8 +16,8 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { useDataLayerValue } from "./DataLayer";
 function Footer({thumbnail,id,title,artist}) {
-    const [{volume,queuenum,queuelen}, dispatch] = useDataLayerValue();
-    const [playing, setPlaying] = useState(true);
+    const [{volume,queuenum,queuelen,playing}, dispatch] = useDataLayerValue();
+    // const [playing, setPlaying] = useState(true);
     const [loop,setLoop]=useState(false);
     const [elapsed,setElapsed]=useState('0:00');
     const [duration,setDuration]=useState('0:00');
@@ -26,9 +26,15 @@ function Footer({thumbnail,id,title,artist}) {
     const [fav,setFav]=useState(false);
     const toggle_playing =()=>{
         if(playing==true){
-            setPlaying(false);
+            dispatch({
+                type: "SET_PLAYING",
+                playing: false,
+              });
         }else{
-            setPlaying(true);
+            dispatch({
+                type: "SET_PLAYING",
+                playing: true,
+              });
         }
     }
     const toggle_fav=()=>{
