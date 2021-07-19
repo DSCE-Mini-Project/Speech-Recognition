@@ -70,7 +70,7 @@ function Header() {
       .catch((e) => console.log(e));
       // getemotion();
   }, [userdata]);
-  const [{ uid }, dispatch] = useDataLayerValue();
+  const [{ uid,id,title,artist,thumbnail }, dispatch] = useDataLayerValue();
   const [isListening, setIsListening] = useState(true);
   // const microphoneRef = useRef(null);
   const [mic, setMic] = useState(true);
@@ -166,12 +166,41 @@ function Header() {
       
     },
     {
-      command: "clear",
-      callback: async ({ resetTranscript }) => {
-        handleReset();
-        await timeout(1000);
-        handleListing();
-      },
+      command: "rhythm add to playlist",
+      callback: () => 
+      db.collection('playlist')
+      .doc(uid)
+      .collection("music")
+      .add({
+        channeltitle: artist,
+        id: id,
+        duration: "5:30",
+        title: title,
+        url: thumbnail,
+      })
+      
+    },
+    {
+      command: "rhythm search *",
+      callback: (key) => 
+        setkeyword(key)
+      
+      
+    },
+    {
+      command: "rhythm add to queue",
+      callback: () => 
+      db.collection('queue')
+      .doc(uid)
+      .collection("music")
+      .add({
+        channeltitle: artist,
+        id: id,
+        duration: "5:30",
+        title: title,
+        url: thumbnail,
+      })
+      
     },
   ];
 
@@ -205,14 +234,14 @@ function Header() {
     stopHandle();
     resetTranscript();
   };
-  function setkeyword() {
+  function setkeyword(key) {
     dispatch({
       type: "SET_OPTION",
       option: 6,
     });
     dispatch({
       type: "SET_KEYWORD",
-      keyword: searchkey,
+      keyword: key,
     });
   }
   const search = (song, audio) => {
@@ -266,7 +295,7 @@ function Header() {
             type="text"
             className="search_text"
             placeholder="Search for songs,videos and ..."
-            onKeyPress={(e) => e.key === "Enter" && setkeyword()}
+            onKeyPress={(e) => e.key === "Enter" && setkeyword(searchkey)}
             onChange={(e) => setSearchkey(e.target.value)}
           ></input>
         </div>
