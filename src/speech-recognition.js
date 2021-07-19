@@ -25,6 +25,7 @@ import Queue from "./queue";
 import { useDataLayerValue } from "./DataLayer";
 import Footer_video from "./footer_video";
 import Search from "./search";
+import { ToggleOff } from "@material-ui/icons";
 function timeout(delay) {
   return new Promise((res) => setTimeout(res, delay));
 }
@@ -40,8 +41,7 @@ function Speech_recognition() {
 
   const [isListening, setIsListening] = useState(false);
   const microphoneRef = useRef(null);
-
-
+ 
   return (
     <div className="home">
       <div className="home_header">
@@ -117,6 +117,7 @@ function Speech_recognition() {
           {option == 4 ? <Playlist /> : <div />}
           {option == 5 ? <Queue /> : <div />}
           {option == 6 ? <Search /> : <div />}
+          
         </div>
       </div>
 

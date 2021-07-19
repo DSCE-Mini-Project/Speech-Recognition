@@ -110,8 +110,6 @@
     display: flex;
     flex-direction: column;
     margin-left: 40px;
-    
-    
   }
   .option{
     cursor: pointer;
@@ -129,4 +127,3 @@
     width: 100%;
     margin-left: 20px;
   }
-  

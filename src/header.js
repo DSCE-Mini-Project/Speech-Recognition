@@ -61,6 +61,7 @@ const StyledMenuItem = withStyles((theme) => ({
 }))(MenuItem);
 
 function Header() {
+
   const [userdata, setUserdata] = useState([]);
   useEffect(() => {
     db.collection("profile")
@@ -69,6 +70,7 @@ function Header() {
       .then((snapshot) => setUserdata(snapshot.data()))
       .catch((e) => console.log(e));
       // getemotion();
+  //  console.log(transcript);
   }, [userdata]);
   const [{ uid,id,title,artist,thumbnail }, dispatch] = useDataLayerValue();
   const [isListening, setIsListening] = useState(true);
@@ -81,6 +83,14 @@ function Header() {
   const [image, setImage] = useState("");
   const [previewimg, setPreview] = useState("");
   var emotion_emoji = { happy: "😄", angry: "😡", sad: "🙁", calm: "🙂" };
+  const [showcommands,setShowcommands]=useState(false);
+  function togglesetcomands(){
+    if(showcommands){
+      setShowcommands(false);
+    }else{
+      setShowcommands(true);
+    }
+  }
   const handleClick = (event) => {
 
     setAnchorEl(event.currentTarget);
@@ -223,6 +233,7 @@ function Header() {
     SpeechRecognition.startListening({
       continuous: true,
     });
+    
   };
   const stopHandle = () => {
     setMic(false);
@@ -282,6 +293,7 @@ function Header() {
       .then((response) => response.json())
       .then((data) => setEmotion(data.result));
   }
+  
   return (
     <div className="header">
       <div className="header_left">
@@ -382,6 +394,8 @@ function Header() {
         </Dialog>
         <h4>{userdata.username}</h4>
         <h1>{emotion_emoji[emotion]}</h1>
+        <div className='commands_option' onClick={()=>togglesetcomands()}></div>
+        {showcommands?<div className='commands'><h5>{transcript}</h5></div>:<div></div>}
       </div>
     </div>
   );
