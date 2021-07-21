@@ -82,6 +82,7 @@ function Header() {
   const [upadtedname, setUpdatedname] = useState("");
   const [image, setImage] = useState("");
   const [previewimg, setPreview] = useState("");
+  const [emotionsong,setEmotionsong]=useState([]);
   var emotion_emoji = { happy: "😄", angry: "😡", sad: "🙁", calm: "🙂" };
   const [showcommands,setShowcommands]=useState(false);
   function togglesetcomands(){
@@ -292,8 +293,37 @@ function Header() {
     fetch("http://127.0.0.1:5000/")
       .then((response) => response.json())
       .then((data) => setEmotion(data.result));
+      db.collection(emotion)
+      .onSnapshot((snapshot) =>playemotionsong(snapshot.docs[0].data())
+      // setEmotionsong(
+      //     snapshot.docs.map((doc) => doc.data()  
+      //     )
+      //   )
+      );
+    
   }
-  
+  function playemotionsong(song){
+    dispatch({
+      type: "SET_ID",
+      id: song.id,
+    });
+    dispatch({
+      type: "SET_TITLE",
+      title: song.title,
+    });
+    dispatch({
+      type: "SET_ARTIST",
+      artist: song.channeltitle,
+    });
+    dispatch({
+      type: "SET_THUMBNAIL",
+      thumbnail: song.url,
+    });
+    dispatch({
+      type: "SET_CONTENT_TYPE",
+      isaudio: true,
+    });
+  }
   return (
     <div className="header">
       <div className="header_left">
@@ -393,8 +423,8 @@ function Header() {
           </DialogActions>
         </Dialog>
         <h4>{userdata.username}</h4>
-        <h1>{emotion_emoji[emotion]}</h1>
-        <div className='commands_option' onClick={()=>togglesetcomands()}></div>
+        <h1 onClick={()=>getemotion()}>{emotion_emoji[emotion]}</h1>
+        {/* <div className='commands_option' onClick={()=>togglesetcomands()}></div> */}
         {showcommands?<div className='commands'><h5>{transcript}</h5></div>:<div></div>}
       </div>
     </div>

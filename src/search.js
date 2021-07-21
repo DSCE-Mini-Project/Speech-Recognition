@@ -52,7 +52,7 @@ function MusicTile({ item }) {
         .collection("music")
         .add({
           channeltitle: item.snippet.channelTitle,
-          id: item.id,
+          id: item.id.videoId,
           duration: "5:30",
           title: item.snippet.title,
           url: item.snippet.thumbnails.high.url,
@@ -72,6 +72,16 @@ function MusicTile({ item }) {
       });
       console.log('deleted')
     };
+    const custom = () => {
+      db.collection("calm")
+        .add({
+          channeltitle: item.snippet.channelTitle,
+          id: item.id.videoId,
+          duration: "6:05",
+          title: item.snippet.title,
+          url: item.snippet.thumbnails.high.url,
+        });
+    };
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
     };
@@ -82,7 +92,7 @@ function MusicTile({ item }) {
         .collection("music")
         .add({
           channeltitle: item.snippet.channelTitle,
-          id: item.id,
+          id: item.id.videoId,
           duration: "5:30",
           title: item.snippet.title,
           url: item.snippet.thumbnails.high.url,
