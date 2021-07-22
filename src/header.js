@@ -199,6 +199,18 @@ function Header() {
       
     },
     {
+      command: "rhythm play a song",
+      callback: () => 
+      db.collection(emotion)
+      .onSnapshot((snapshot) =>playemotionsong(snapshot.docs[0].data())
+      // setEmotionsong(
+      //     snapshot.docs.map((doc) => doc.data()  
+      //     )
+      //   )
+      )
+      
+    },
+    {
       command: "rhythm add to queue",
       callback: () => 
       db.collection('queue')
@@ -293,13 +305,7 @@ function Header() {
     fetch("http://127.0.0.1:5000/")
       .then((response) => response.json())
       .then((data) => setEmotion(data.result));
-      db.collection(emotion)
-      .onSnapshot((snapshot) =>playemotionsong(snapshot.docs[0].data())
-      // setEmotionsong(
-      //     snapshot.docs.map((doc) => doc.data()  
-      //     )
-      //   )
-      );
+      
     
   }
   function playemotionsong(song){
@@ -424,7 +430,7 @@ function Header() {
         </Dialog>
         <h4>{userdata.username}</h4>
         <h1 onClick={()=>getemotion()}>{emotion_emoji[emotion]}</h1>
-        {/* <div className='commands_option' onClick={()=>togglesetcomands()}></div> */}
+        <div className='commands_option' onClick={()=>togglesetcomands()}><h2>C</h2></div>
         {showcommands?<div className='commands'><h5>{transcript}</h5></div>:<div></div>}
       </div>
     </div>

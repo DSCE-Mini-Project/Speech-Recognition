@@ -11,7 +11,7 @@ import { auth, db } from "./firebase";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
-const apiUrl ="https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&regionCode=IN&videoCategoryId=10&key=AIzaSyA_-pgGuPTYypNGox45JMcC0u86u87Tu8I&maxResults=30"  
+const apiUrl ="https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&videoCategoryId=10&key=AIzaSyA_-pgGuPTYypNGox45JMcC0u86u87Tu8I&maxResults=30"  
 
 function Music() {
    var [data,setData]=useState([]);

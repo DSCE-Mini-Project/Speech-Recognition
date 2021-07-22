@@ -59,7 +59,7 @@ function Speech_recognition() {
             }
           >
             <MusicNoteIcon />
-            <p className="title">Music</p>
+            <p className="title">{option!=1?<p>Music</p>:<span style={{textDecoration: "underline"}}>Music</span>}</p>
           </div>
           <div
             className="option"
@@ -71,7 +71,7 @@ function Speech_recognition() {
             }
           >
             <YouTubeIcon />
-            <p className="title">Videos</p>
+            <p className="title">{option!=2?<p>Videos</p>:<span style={{textDecoration: 'underline'}}>Videos</span>}</p>
           </div>
           <div
             className="option"
@@ -83,7 +83,7 @@ function Speech_recognition() {
             }
           >
             <ThumbUpAltIcon />
-            <p className="title">Favourites</p>
+            <p className="title">{option!=3?<p>Favourites</p>:<span style={{textDecoration: "underline"}}>Favourites</span>}</p>
           </div>
           <div
             className="option"
@@ -95,7 +95,7 @@ function Speech_recognition() {
             }
           >
             <PlaylistPlayIcon />
-            <p className="title">Playlist</p>
+            <p className="title">{option!=4?<p>Playlist</p>:<span style={{textDecoration: "underline"}}>Playlist</span>}</p>
           </div>
           <div
             className="option"
@@ -107,7 +107,7 @@ function Speech_recognition() {
             }
           >
             <QueueIcon />
-            <p className="title">Queue</p>
+            <p className="title">{option!=5?<p>Queue</p>:<span style={{textDecoration: "underline"}}>Queue</span>}</p>
           </div>
         </div>
         <div className="home_center_right">
